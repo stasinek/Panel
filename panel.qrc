@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>ico/TRANS.ICO</file>
+        <file>bmp/bl.png</file>
+        <file>bmp/br.png</file>
+        <file>bmp/BRINGUP.png</file>
+        <file>bmp/CELLULES.png</file>
+        <file>bmp/killer2.png</file>
+        <file>bmp/killer3.png</file>
+        <file>bmp/shared.png</file>
+        <file>bmp/tl.png</file>
+        <file>bmp/tr.png</file>
+        <file>bmp/TRISIZE.png</file>
+        <file>bmp/ZWIN.png</file>
+        <file>bmp/menu.PNG</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/logo">
+        <file>info.bmp</file>
+        <file>RO.ICO</file>
+    </qresource>
+</RCC>
