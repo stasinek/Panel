@@ -1,4 +1,6 @@
+//---------------------------------------------------------------------------
 #include "core.h"
+//---------------------------------------------------------------------------
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +18,7 @@ int main(int argc, char *argv[])
     Expo_form = new TExpo_form();
     Move_form = new TMove_form();
     Atab_form = new TAtab_form();
+    Arne_form = new TArne_form();
 
     //InitializeHooks((HINSTANCE)::GetModuleHandle(NULL),(HWND)(Main_form->winId()));
     Main_form->show();
@@ -31,7 +34,9 @@ int main(int argc, char *argv[])
     delete Expo_form;
     delete Move_form;
     delete Atab_form;
+    delete Arne_form;
 
     delete Tiles; delete Desktop;
     return ret;
 }
+//---------------------------------------------------------------------------

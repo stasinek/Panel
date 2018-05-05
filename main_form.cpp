@@ -1,15 +1,17 @@
+//---------------------------------------------------------------------------
 #include "core.h"
 #include "main_form.h"
-#include "lupa.h"
-#include "expo.h"
-#include "desk.h"
-#include "move.h"
-#include "tips.h"
-#include "size.h"
-#include "zeus.h"
-#include "atab.h"
-
-#include "ui_main.h"
+#include "lupa_form.h"
+#include "expo_form.h"
+#include "desk_form.h"
+#include "move_form.h"
+#include "tips_form.h"
+#include "size_form.h"
+#include "zeus_form.h"
+#include "atab_form.h"
+//---------------------------------------------------------------------------
+#include "ui_main_form.h"
+//---------------------------------------------------------------------------
 
 TMain_form::TMain_form(QWidget *parent) :
 	QDialog(parent),
@@ -21,12 +23,15 @@ TMain_form::TMain_form(QWidget *parent) :
 	move_it = false;
 	this->setMouseTracking(false);
 }
+//---------------------------------------------------------------------------
 
 TMain_form::~TMain_form()
 {
 	delete ui;
 	delete trayIcon;
 }
+//---------------------------------------------------------------------------
+
 void TMain_form::mousePressEvent(QMouseEvent *event)
 {
 	QWidget::mousePressEvent(event);
@@ -35,6 +40,7 @@ void TMain_form::mousePressEvent(QMouseEvent *event)
 		last_mouse_pos = event->pos();
 	}
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::mouseMoveEvent(QMouseEvent *event)
 {
@@ -43,6 +49,7 @@ void TMain_form::mouseMoveEvent(QMouseEvent *event)
 	   this->move(this->pos() + event->pos() - last_mouse_pos);
 	}
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::mouseReleaseEvent(QMouseEvent *event)
 {
@@ -51,26 +58,28 @@ void TMain_form::mouseReleaseEvent(QMouseEvent *event)
 		move_it = false;
 	}
 }
-
+//---------------------------------------------------------------------------
 
 void TMain_form::on_TMain_form_windowIconChanged(const QIcon &icon)
 {
 	trayIcon->setIcon(icon);
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonDesk1_clicked(bool checked)
 {
-	setWindowTitle("1");
+    setWindowTitle("Desk: 1");
 	ui->SpeedButtonDesk1->setChecked(true);
 	ui->SpeedButtonDesk2->setChecked(0);
 	ui->SpeedButtonDesk3->setChecked(0);
 	ui->SpeedButtonDesk4->setChecked(0);
 	ui->SpeedButtonDesk5->setChecked(0);
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonDesk2_clicked(bool checked)
 {
-	setWindowTitle("2");
+    setWindowTitle("Desk: 2");
 	ui->SpeedButtonDesk1->setChecked(0);
 	ui->SpeedButtonDesk2->setChecked(true);
 	ui->SpeedButtonDesk3->setChecked(0);
@@ -78,10 +87,11 @@ void TMain_form::on_SpeedButtonDesk2_clicked(bool checked)
 	ui->SpeedButtonDesk5->setChecked(0);
 
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonDesk3_clicked(bool checked)
 {
-	setWindowTitle("3");
+    setWindowTitle("Desk: 3");
 	ui->SpeedButtonDesk1->setChecked(0);
 	ui->SpeedButtonDesk2->setChecked(0);
 	ui->SpeedButtonDesk3->setChecked(true);
@@ -89,10 +99,11 @@ void TMain_form::on_SpeedButtonDesk3_clicked(bool checked)
 	ui->SpeedButtonDesk5->setChecked(0);
 
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonDesk4_clicked(bool checked)
 {
-	setWindowTitle("4");
+    setWindowTitle("Desk: 4");
 	ui->SpeedButtonDesk1->setChecked(0);
 	ui->SpeedButtonDesk2->setChecked(0);
 	ui->SpeedButtonDesk3->setChecked(0);
@@ -100,10 +111,11 @@ void TMain_form::on_SpeedButtonDesk4_clicked(bool checked)
 	ui->SpeedButtonDesk5->setChecked(0);
 
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonDesk5_clicked(bool checked)
 {
-	setWindowTitle("*");
+    setWindowTitle("Desk: Shared");
 	ui->SpeedButtonDesk1->setChecked(0);
 	ui->SpeedButtonDesk2->setChecked(0);
 	ui->SpeedButtonDesk3->setChecked(0);
@@ -111,6 +123,7 @@ void TMain_form::on_SpeedButtonDesk5_clicked(bool checked)
 	ui->SpeedButtonDesk5->setChecked(true);
 
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonDeskGrid_clicked(bool checked)
 {
@@ -118,6 +131,7 @@ void TMain_form::on_SpeedButtonDeskGrid_clicked(bool checked)
 	else Desk_form->show();
 	ui->SpeedButtonDeskGrid->setChecked(Desk_form->isVisible());
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonLupa_clicked(bool checked)
 {
@@ -125,6 +139,7 @@ void TMain_form::on_SpeedButtonLupa_clicked(bool checked)
 	else Lupa_form->show();
 	ui->SpeedButtonLupa->setChecked(Lupa_form->isVisible());
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonZeus_clicked(bool checked)
 {
@@ -132,6 +147,7 @@ void TMain_form::on_SpeedButtonZeus_clicked(bool checked)
 	else Zeus_form->show();
 	ui->SpeedButtonZeus->setChecked(Zeus_form->isVisible());
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonMenu_clicked(bool checked)
 {
@@ -143,25 +159,16 @@ void TMain_form::on_SpeedButtonMinimize_clicked(bool checked)
 {
 	this->setWindowState(Qt::WindowMinimized);
 }
+//---------------------------------------------------------------------------
 
 void TMain_form::on_actionExit_triggered()
 {
 
 }
+//---------------------------------------------------------------------------
 
-void TMain_form::on_SpeedButtonMenu_clicked()
+void TMain_form::on_SpeedButtonClose_clicked()
 {
-//	showMenu()
-
-
+    this->close();
 }
-
-void TMain_form::on_SpeedButtonMinimize_clicked()
-{
-
-}
-
-void TMain_form::on_SpeedButtonZeus_clicked()
-{
-
-}
+//---------------------------------------------------------------------------

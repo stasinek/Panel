@@ -1,5 +1,5 @@
 #include "core.h"
-#include "desk.h"
+#include "desk_form.h"
 #include "ui_desk.h"
 
 TDesk_form::TDesk_form(QWidget *parent) :
@@ -29,16 +29,16 @@ void __fastcall TDesk_form::tform_Align(void)
 ::GetWindowRect((HWND)this->winId(),&options.rect);
 
 if (options.rect.left	 < Desktop->Screen->Rect.left)
-   {options.rect.left   = Desktop->Screen->Rect.left;
+   {options.rect.left    = Desktop->Screen->Rect.left;
    }
 if (options.rect.right  >= Desktop->Screen->Rect.right)
-   {options.rect.left   = Desktop->Screen->Rect.right  - (options.rect.right-options.rect.left);
+   {options.rect.left    = Desktop->Screen->Rect.right  - (options.rect.right-options.rect.left);
    }
 if (options.rect.top	 < Desktop->Screen->Rect.top)
-   {options.rect.top    = Desktop->Screen->Rect.top;
+   {options.rect.top     = Desktop->Screen->Rect.top;
    }
 if (options.rect.bottom >= Desktop->Screen->Rect.bottom)
-   {options.rect.top    = Desktop->Screen->Rect.bottom - (options.rect.bottom-options.rect.top);
+   {options.rect.top     = Desktop->Screen->Rect.bottom - (options.rect.bottom-options.rect.top);
    }
 SetWindowPos((HWND)this->winId(),NULL,
 		options.rect.left,options.rect.top,0,0,
@@ -72,9 +72,8 @@ tform_Align();
 void __fastcall TDesk_form::tform_Redraw()
 {
 static bool lock = 0;
-if (lock==1)
-		return;
-lock = 1;
+ if (lock==1) return;
+else lock =1;
 
 static HBRUSH btnbrush = GetSysColorBrush(COLOR_BTNFACE);
 static HBRUSH redbrush = CreateSolidBrush(RGB(255,115,115)), greenbrush = CreateSolidBrush(RGB(115,255,115)), bluebrush = CreateSolidBrush(RGB(115,115,255));
