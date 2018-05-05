@@ -58,17 +58,18 @@ SOURCES += main.cpp\
         ../../../x86_win32_classes/tsoft_WindowsTile.cpp \
         ../../../x86_win32_classes/tsoft_WindowsCollector.cpp \
         ../../../x86_win32_classes/tsoft_WindowsSnap.cpp \
-        zeus.cpp \
-	tips.cpp \
 	core.cpp \
-	size.cpp \
-	lupa.cpp \
-	desk.cpp \
-	move.cpp \
-	atab.cpp \
-	expo.cpp \
 	main_form.cpp \
-    zoom.cpp
+    zoom_form.cpp \
+    zeus_form.cpp \
+    tips_form.cpp \
+    size_form.cpp \
+    move_form.cpp \
+    lupa_form.cpp \
+    expo_form.cpp \
+    desk_form.cpp \
+    atab_form.cpp \
+    arnold_form.cpp
 
 HEADERS  += core.h \
         ../../../x86_win32_classes/tsoft_WindowsMover.h \
@@ -76,28 +77,30 @@ HEADERS  += core.h \
         ../../../x86_win32_classes/tsoft_WindowsTile.h \
         ../../../x86_win32_classes/tsoft_Context.h \
         ../../../x86_win32_classes/tsoft_WindowsSnap.h \
-        zeus.h \
-	tips.h \
-	lupa.h \
-	desk.h \
-	move.h \
-	atab.h \
-	size.h \
-	expo.h \
 	main_form.h \
-    zoom.h
+    zoom_form.h \
+    zeus_form.h \
+    tips_form.h \
+    size_form.h \
+    move_form.h \
+    lupa_form.h \
+    expo_form.h \
+    desk_form.h \
+    atab_form.h \
+    arnold_form.h
 
 FORMS    += \
-	zeus.ui \
-	tips.ui \
-	size.ui \
-	lupa.ui \
-	desk.ui \
-	move.ui \
-	atab.ui \
-	expo.ui \
-        main.ui \
-        zoom.ui
+    atab_form.ui \
+    desk_form.ui \
+    tips_form.ui \
+    zeus_form.ui \
+    zoom_form.ui \
+    size_form.ui \
+    move_form.ui \
+    main_form.ui \
+    lupa_form.ui \
+    expo_form.ui \
+    arnold_form.ui
 
 SOURCES +=  ekierka_form.cpp \
         wymiary_form.cpp

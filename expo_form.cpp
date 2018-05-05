@@ -1,19 +1,20 @@
 //---------------------------------------------------------------------------
 #include "core.h"
-#include "wymiary_form.h"
+#include "main_form.h"
+#include "expo_form.h"
 //---------------------------------------------------------------------------
-#include "ui_wymiary_form.h"
+#include "ui_expo.h"
 //---------------------------------------------------------------------------
 
-Wymiary_form::Wymiary_form(QWidget *parent) :
+TExpo_form::TExpo_form(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Wymiary_form)
+    ui(new Ui::TExpo_form)
 {
     ui->setupUi(this);
 }
 //---------------------------------------------------------------------------
 
-Wymiary_form::~Wymiary_form()
+TExpo_form::~TExpo_form()
 {
     delete ui;
 }

@@ -1,5 +1,9 @@
+//---------------------------------------------------------------------------
+#include "core.h"
 #include "ekierka_form.h"
+//---------------------------------------------------------------------------
 #include "ui_ekierka_form.h"
+//---------------------------------------------------------------------------
 
 Ekierka_form::Ekierka_form(QWidget *parent) :
     QMainWindow(parent),
@@ -11,12 +15,14 @@ Ekierka_form::Ekierka_form(QWidget *parent) :
     ui->horizontalSlider->setMaximum(ui->graphicsView->width());
     ui->verticalSlider->setMaximum(ui->graphicsView->height());
 }
+//---------------------------------------------------------------------------
 
 Ekierka_form::~Ekierka_form()
 {
     delete ui;
     delete scene;
 }
+//---------------------------------------------------------------------------
 
 void Ekierka_form::on_toolButton_2_clicked(bool checked)
 {
@@ -29,6 +35,7 @@ void Ekierka_form::on_toolButton_2_clicked(bool checked)
     scene->addLine(ui->horizontalSlider->value(),0,ui->horizontalSlider->value(),ui->graphicsView->height(),pen);
     ui->graphicsView->show();
 }
+//---------------------------------------------------------------------------
 
 void Ekierka_form::on_toolButton_clicked(bool checked)
 {
@@ -41,6 +48,7 @@ void Ekierka_form::on_toolButton_clicked(bool checked)
     scene->addLine(0,ui->verticalSlider->value(),ui->graphicsView->width(),ui->verticalSlider->value(),pen);
     ui->graphicsView->show();
 }
+//---------------------------------------------------------------------------
 
 void Ekierka_form::on_toolButton_4_clicked(bool checked)
 {
@@ -54,3 +62,4 @@ void Ekierka_form::on_toolButton_4_clicked(bool checked)
     scene->addLine(0,ui->verticalSlider->value(),ui->graphicsView->width(),ui->verticalSlider->value(),pen);
     ui->graphicsView->show();
 }
+//---------------------------------------------------------------------------

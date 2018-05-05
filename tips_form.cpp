@@ -1,6 +1,9 @@
+//---------------------------------------------------------------------------
 #include "core.h"
-#include "tips.h"
+#include "tips_form.h"
+//---------------------------------------------------------------------------
 #include "ui_tips.h"
+//---------------------------------------------------------------------------
 
 TTips_form::TTips_form(QWidget *parent) :
     QDialog(parent),
@@ -8,16 +11,19 @@ TTips_form::TTips_form(QWidget *parent) :
 {
     ui->setupUi(this);
 }
+//---------------------------------------------------------------------------
 
 TTips_form::~TTips_form()
 {
     delete ui;
 }
+//---------------------------------------------------------------------------
 
 void TTips_form::on_Tips_finished(int result)
 {
 
 }
+//---------------------------------------------------------------------------
 
 void TTips_form::Execute(QString caption, bool timeout, bool flash)
 {

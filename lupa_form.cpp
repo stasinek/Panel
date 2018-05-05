@@ -1,9 +1,10 @@
+//---------------------------------------------------------------------------
 #include "core.h"
-#include "lupa.h"
-#include "zeus.h"
+#include "lupa_form.h"
+#include "zeus_form.h"
+#include "zoom_form.h"
+//---------------------------------------------------------------------------
 #include "ui_lupa.h"
-#include "zoom.h"
-
 //---------------------------------------------------------------------------
 
 TLupa_form::TLupa_form(QWidget *parent) :

@@ -1,6 +1,9 @@
+//---------------------------------------------------------------------------
 #include "core.h"
-#include "move.h"
+#include "move_form.h"
+//---------------------------------------------------------------------------
 #include "ui_move.h"
+//---------------------------------------------------------------------------
 
 TMove_form::TMove_form(QWidget *parent) :
     QDialog(parent),
@@ -8,12 +11,13 @@ TMove_form::TMove_form(QWidget *parent) :
 {
     ui->setupUi(this);
 }
+//---------------------------------------------------------------------------
 
 TMove_form::~TMove_form()
 {
     delete ui;
 }
-
+//---------------------------------------------------------------------------
 
 void __fastcall TMove_form::tform_BeforeShow(void)
 {

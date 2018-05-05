@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'main_form.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.1
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -32,10 +32,9 @@ public:
     QGridLayout *gridLayout;
     QHBoxLayout *horizontalLayout_3;
     QFrame *frame;
-    QHBoxLayout *horizontalLayout;
-    QHBoxLayout *horizontalLayout_2;
-    QToolButton *SpeedButtonMinimize;
     QToolButton *SpeedButtonMenu;
+    QToolButton *SpeedButtonZeus;
+    QHBoxLayout *horizontalLayout;
     QToolButton *SpeedButtonDeskGrid;
     QToolButton *SpeedButtonDesk1;
     QToolButton *SpeedButtonDesk2;
@@ -44,13 +43,14 @@ public:
     QToolButton *SpeedButtonDesk5;
     QFrame *line_2;
     QToolButton *SpeedButtonLupa;
-    QToolButton *SpeedButtonZeus;
+    QToolButton *SpeedButtonMinimize;
+    QToolButton *SpeedButtonClose;
 
     void setupUi(QDialog *TMain_form)
     {
         if (TMain_form->objectName().isEmpty())
             TMain_form->setObjectName(QStringLiteral("TMain_form"));
-        TMain_form->resize(385, 36);
+        TMain_form->resize(393, 42);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -91,45 +91,42 @@ public:
         frame->setCursor(QCursor(Qt::SizeAllCursor));
         frame->setMouseTracking(false);
         frame->setContextMenuPolicy(Qt::ActionsContextMenu);
-        frame->setFrameShape(QFrame::Panel);
+        frame->setAutoFillBackground(false);
+        frame->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 127);"));
+        frame->setFrameShape(QFrame::NoFrame);
         frame->setFrameShadow(QFrame::Raised);
         frame->setLineWidth(1);
 
         horizontalLayout_3->addWidget(frame);
-
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(2);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(2);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        SpeedButtonMinimize = new QToolButton(frame_2);
-        SpeedButtonMinimize->setObjectName(QStringLiteral("SpeedButtonMinimize"));
-        SpeedButtonMinimize->setMinimumSize(QSize(24, 24));
-        SpeedButtonMinimize->setMaximumSize(QSize(32, 32));
-        QIcon icon;
-        icon.addFile(QStringLiteral(":/new/prefix1/bmp/ZWIN.png"), QSize(), QIcon::Normal, QIcon::Off);
-        SpeedButtonMinimize->setIcon(icon);
-        SpeedButtonMinimize->setAutoRaise(true);
-
-        horizontalLayout_2->addWidget(SpeedButtonMinimize);
 
         SpeedButtonMenu = new QToolButton(frame_2);
         SpeedButtonMenu->setObjectName(QStringLiteral("SpeedButtonMenu"));
         SpeedButtonMenu->setMinimumSize(QSize(24, 24));
         SpeedButtonMenu->setMaximumSize(QSize(32, 32));
         SpeedButtonMenu->setContextMenuPolicy(Qt::ActionsContextMenu);
-        QIcon icon1;
-        icon1.addFile(QStringLiteral(":/new/prefix1/bmp/menu.PNG"), QSize(), QIcon::Normal, QIcon::Off);
-        SpeedButtonMenu->setIcon(icon1);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/new/prefix1/bmp/menu.PNG"), QSize(), QIcon::Normal, QIcon::Off);
+        SpeedButtonMenu->setIcon(icon);
         SpeedButtonMenu->setPopupMode(QToolButton::InstantPopup);
         SpeedButtonMenu->setAutoRaise(true);
 
-        horizontalLayout_2->addWidget(SpeedButtonMenu);
+        horizontalLayout_3->addWidget(SpeedButtonMenu);
 
+        SpeedButtonZeus = new QToolButton(frame_2);
+        SpeedButtonZeus->setObjectName(QStringLiteral("SpeedButtonZeus"));
+        SpeedButtonZeus->setMinimumSize(QSize(24, 24));
+        SpeedButtonZeus->setMaximumSize(QSize(32, 32));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/new/prefix1/bmp/BRINGUP.png"), QSize(), QIcon::Normal, QIcon::Off);
+        SpeedButtonZeus->setIcon(icon1);
+        SpeedButtonZeus->setCheckable(true);
+        SpeedButtonZeus->setAutoRaise(true);
 
-        horizontalLayout->addLayout(horizontalLayout_2);
+        horizontalLayout_3->addWidget(SpeedButtonZeus);
 
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(2);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         SpeedButtonDeskGrid = new QToolButton(frame_2);
         SpeedButtonDeskGrid->setObjectName(QStringLiteral("SpeedButtonDeskGrid"));
         SpeedButtonDeskGrid->setMinimumSize(QSize(24, 24));
@@ -219,13 +216,18 @@ public:
 
         SpeedButtonLupa = new QToolButton(frame_2);
         SpeedButtonLupa->setObjectName(QStringLiteral("SpeedButtonLupa"));
-        SpeedButtonLupa->setMinimumSize(QSize(24, 24));
-        SpeedButtonLupa->setMaximumSize(QSize(32, 32));
+        SpeedButtonLupa->setMinimumSize(QSize(48, 24));
+        SpeedButtonLupa->setMaximumSize(QSize(48, 32));
+        QFont font;
+        font.setBold(true);
+        font.setWeight(75);
+        SpeedButtonLupa->setFont(font);
         QIcon icon8;
         icon8.addFile(QStringLiteral(":/new/prefix1/bmp/TRISIZE.png"), QSize(), QIcon::Normal, QIcon::Off);
         SpeedButtonLupa->setIcon(icon8);
         SpeedButtonLupa->setCheckable(true);
         SpeedButtonLupa->setChecked(false);
+        SpeedButtonLupa->setToolButtonStyle(Qt::ToolButtonTextOnly);
         SpeedButtonLupa->setAutoRaise(true);
 
         horizontalLayout->addWidget(SpeedButtonLupa);
@@ -233,20 +235,32 @@ public:
 
         horizontalLayout_3->addLayout(horizontalLayout);
 
-
-        gridLayout->addLayout(horizontalLayout_3, 0, 1, 1, 1);
-
-        SpeedButtonZeus = new QToolButton(frame_2);
-        SpeedButtonZeus->setObjectName(QStringLiteral("SpeedButtonZeus"));
-        SpeedButtonZeus->setMinimumSize(QSize(24, 24));
-        SpeedButtonZeus->setMaximumSize(QSize(32, 32));
+        SpeedButtonMinimize = new QToolButton(frame_2);
+        SpeedButtonMinimize->setObjectName(QStringLiteral("SpeedButtonMinimize"));
+        SpeedButtonMinimize->setMinimumSize(QSize(24, 24));
+        SpeedButtonMinimize->setMaximumSize(QSize(32, 32));
         QIcon icon9;
-        icon9.addFile(QStringLiteral(":/new/prefix1/bmp/killer2.png"), QSize(), QIcon::Normal, QIcon::Off);
-        SpeedButtonZeus->setIcon(icon9);
-        SpeedButtonZeus->setCheckable(true);
-        SpeedButtonZeus->setAutoRaise(true);
+        icon9.addFile(QStringLiteral(":/new/prefix1/bmp/ZWIN.png"), QSize(), QIcon::Normal, QIcon::Off);
+        SpeedButtonMinimize->setIcon(icon9);
+        SpeedButtonMinimize->setAutoRaise(true);
 
-        gridLayout->addWidget(SpeedButtonZeus, 0, 0, 1, 1);
+        horizontalLayout_3->addWidget(SpeedButtonMinimize);
+
+        SpeedButtonClose = new QToolButton(frame_2);
+        SpeedButtonClose->setObjectName(QStringLiteral("SpeedButtonClose"));
+        SpeedButtonClose->setMinimumSize(QSize(24, 24));
+        SpeedButtonClose->setMaximumSize(QSize(32, 32));
+        QFont font1;
+        font1.setPointSize(10);
+        font1.setBold(true);
+        font1.setWeight(75);
+        SpeedButtonClose->setFont(font1);
+        SpeedButtonClose->setAutoRaise(true);
+
+        horizontalLayout_3->addWidget(SpeedButtonClose);
+
+
+        gridLayout->addLayout(horizontalLayout_3, 0, 4, 1, 1);
 
 
         verticalLayout->addWidget(frame_2);
@@ -261,16 +275,17 @@ public:
     {
         TMain_form->setWindowTitle(QApplication::translate("TMain_form", "Panel", 0));
         actionExit->setText(QApplication::translate("TMain_form", "Exit", 0));
-        SpeedButtonMinimize->setText(QApplication::translate("TMain_form", "M", 0));
         SpeedButtonMenu->setText(QApplication::translate("TMain_form", "P", 0));
+        SpeedButtonZeus->setText(QApplication::translate("TMain_form", "Z", 0));
         SpeedButtonDeskGrid->setText(QApplication::translate("TMain_form", "D", 0));
         SpeedButtonDesk1->setText(QApplication::translate("TMain_form", "1", 0));
         SpeedButtonDesk2->setText(QApplication::translate("TMain_form", "2", 0));
         SpeedButtonDesk3->setText(QApplication::translate("TMain_form", "3", 0));
         SpeedButtonDesk4->setText(QApplication::translate("TMain_form", "4", 0));
         SpeedButtonDesk5->setText(QApplication::translate("TMain_form", "*", 0));
-        SpeedButtonLupa->setText(QApplication::translate("TMain_form", "L", 0));
-        SpeedButtonZeus->setText(QApplication::translate("TMain_form", "Z", 0));
+        SpeedButtonLupa->setText(QApplication::translate("TMain_form", "ZOOM", 0));
+        SpeedButtonMinimize->setText(QApplication::translate("TMain_form", "M", 0));
+        SpeedButtonClose->setText(QApplication::translate("TMain_form", "X", 0));
     } // retranslateUi
 
 };

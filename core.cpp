@@ -2,6 +2,7 @@
 #include "main_form.h"
 //---------------------------------------------------------------------------
 QApplication *Application;
+//---------------------------------------------------------------------------
 TMain_form *Main_form;
 TZeus_form *Zeus_form;
 TZoom_form *Zoom_form;
@@ -12,11 +13,13 @@ TDesk_form *Desk_form;
 TAtab_form *Atab_form;
 TExpo_form *Expo_form;
 TMove_form *Move_form;
-
+TArne_form *Arne_form;
+//---------------------------------------------------------------------------
 ts::WindowsCOLLECTOR *Desktop;
 ts::WindowsTILES *Tiles;
 struct __GlobalKEYPressed GlobalKEYPressed;
 HANDLE hMutex;
+//---------------------------------------------------------------------------
 
 LRESULT InitializeHooks(HINSTANCE ahInstance, HWND ahWnd) {
 
@@ -41,6 +44,8 @@ LRESULT InitializeHooks(HINSTANCE ahInstance, HWND ahWnd) {
 	//------------------------------------
 	return true;
 }
+//---------------------------------------------------------------------------
+
 LRESULT DestroyHooks(void) {
 delete Desktop;
 delete Tiles;
@@ -48,6 +53,7 @@ UnhookWindowsHookEx(llkbdhhook);
 ::CloseHandle(hMutex);
 return true;
 }
+//---------------------------------------------------------------------------
 
 LRESULT WindowswitcherProc(INT aCode, INT aPhase) {
 //------------------------------------

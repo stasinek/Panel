@@ -1,5 +1,5 @@
 #include "core.h"
-#include "atab.h"
+#include "atab_form.h"
 #include "ui_atab.h"
 
 TAtab_form::TAtab_form(QWidget *parent) :
