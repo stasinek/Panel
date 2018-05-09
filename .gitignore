@@ -18,5 +18,6 @@
 *(from*).*
 *.Debug
 *.Release
-./debug/*.*
-./release/*.*
+debug/*
+release/*
+moc_*
