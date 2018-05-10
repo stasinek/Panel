@@ -56,7 +56,7 @@ public:
         verticalLayout = new QVBoxLayout(TMove_form);
         verticalLayout->setSpacing(4);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(4, 4, 4, 4);
+        verticalLayout->setContentsMargins(8, 8, 8, 8);
         widget = new QWidget(TMove_form);
         widget->setObjectName(QStringLiteral("widget"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);

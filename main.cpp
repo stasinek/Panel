@@ -5,8 +5,9 @@
 int main(int argc, char *argv[])
 {
     Application = new QApplication(argc, argv);
-    Desktop = new ts::WindowsCOLLECTOR;
-    Tiles = new ts::WindowsTILES;
+    Settings = new QSettings("SSTSOFT", "Panel");
+
+    Desktop = new ts::WindowsCOLLECTOR; Tiles = new ts::WindowsTILES;
 
     Main_form = new TMain_form();
     Tips_form = new TTips_form();
@@ -36,7 +37,8 @@ int main(int argc, char *argv[])
     delete Atab_form;
     delete Arne_form;
 
-    delete Tiles; delete Desktop;
+    Settings->sync();
+    delete Tiles; delete Desktop; delete Settings; delete Application;
     return ret;
 }
 //---------------------------------------------------------------------------

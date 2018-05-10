@@ -61,11 +61,19 @@ public:
         sizePolicy1.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
         tableWidget->setSizePolicy(sizePolicy1);
         tableWidget->setMaximumSize(QSize(16777215, 96));
+        tableWidget->setFrameShape(QFrame::Panel);
+        tableWidget->setFrameShadow(QFrame::Sunken);
+        tableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        tableWidget->setGridStyle(Qt::DotLine);
+        tableWidget->setSortingEnabled(true);
         tableWidget->setColumnCount(32);
         tableWidget->horizontalHeader()->setCascadingSectionResizes(false);
         tableWidget->horizontalHeader()->setDefaultSectionSize(64);
+        tableWidget->horizontalHeader()->setMinimumSectionSize(32);
         tableWidget->horizontalHeader()->setStretchLastSection(true);
         tableWidget->verticalHeader()->setVisible(false);
+        tableWidget->verticalHeader()->setDefaultSectionSize(32);
+        tableWidget->verticalHeader()->setMinimumSectionSize(32);
         tableWidget->verticalHeader()->setStretchLastSection(true);
 
         verticalLayout->addWidget(tableWidget);

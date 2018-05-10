@@ -10,11 +10,13 @@ TZoom_form::TZoom_form(QWidget *parent) :
     ui(new Ui::TZoom_form)
 {
     ui->setupUi(this);
+    readPositionSettings(Settings,static_cast<QWidget*>(this),"zoom_form");
 }
 //---------------------------------------------------------------------------
 
 TZoom_form::~TZoom_form()
 {
+    writePositionSettings(Settings,static_cast<QWidget*>(this),"zoom_form");
     delete ui;
 }
 //---------------------------------------------------------------------------

@@ -44,6 +44,7 @@ public:
         TTips_form->setFont(font);
         horizontalLayout = new QHBoxLayout(TTips_form);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(8, 8, 8, 8);
         widget = new QWidget(TTips_form);
         widget->setObjectName(QStringLiteral("widget"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);

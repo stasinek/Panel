@@ -10,11 +10,13 @@ TZeus_form::TZeus_form(QWidget *parent) :
     ui(new Ui::TZeus_form)
 {
     ui->setupUi(this);
+    readPositionSettings(Settings,static_cast<QWidget*>(this),"zeus_form");
 }
 //---------------------------------------------------------------------------
 
 TZeus_form::~TZeus_form()
 {
+    writePositionSettings(Settings,static_cast<QWidget*>(this),"zeus_form");
     delete ui;
 }
 //---------------------------------------------------------------------------

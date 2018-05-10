@@ -2,6 +2,7 @@
 #include "main_form.h"
 //---------------------------------------------------------------------------
 QApplication *Application;
+QSettings *Settings;
 //---------------------------------------------------------------------------
 TMain_form *Main_form;
 TZeus_form *Zeus_form;
@@ -21,28 +22,60 @@ struct __GlobalKEYPressed GlobalKEYPressed;
 HANDLE hMutex;
 //---------------------------------------------------------------------------
 
+void writePositionSettings(QSettings *asettings,QWidget *sender,char *name)
+{
+    asettings->beginGroup( name );
+
+    asettings->setValue( "geometry", sender->saveGeometry() );
+//    asettings->setValue( "savestate", sender->saveState() );
+    asettings->setValue( "maximized", sender->isMaximized() );
+    if (!sender->isMaximized() ) {
+        asettings->setValue( "pos", sender->pos() );
+        asettings->setValue( "size", sender->size() );
+    }
+    asettings->endGroup();
+}
+//---------------------------------------------------------------------------
+
+void readPositionSettings(QSettings *asettings, QWidget *sender,char *name)
+{
+    asettings->beginGroup( name );
+
+    sender->restoreGeometry(asettings->value( "geometry" ).toByteArray());
+//    restoreState(asettings->value( "savestate" ).toByteArray());
+    QPoint pos(asettings->value( "pos" ).toPoint());
+    sender->move(pos);
+    QSize size(asettings->value( "size" ).toSize());
+    sender->resize(size);
+    bool maximized = asettings->value( "maximized" ).toBool();
+    if (maximized) sender->showMaximized();
+
+    asettings->endGroup();
+}
+//---------------------------------------------------------------------------
+
 LRESULT InitializeHooks(HINSTANCE ahInstance, HWND ahWnd) {
 
-	hMutex = ::CreateMutexA(NULL,TRUE,"tsoftPanel_mutex");
-	if  (GetLastError()==ERROR_ALREADY_EXISTS)
-		{return MessageBoxW(0,TEXT("Próbujesz uruchomić kilkukrotnie, to nie ma sensu ;-)"),
-						   TEXT("__tsoft->Panel.exe"),
-					   MB_OK|MB_ICONERROR|MB_SYSTEMMODAL);
-		 }
-	//------------------------------------
-	GlobalKEYPressed.Ctrl = GlobalKEYPressed.Alt = GlobalKEYPressed.Locked = false;
-	llkbdhhook = SetWindowsHookEx(WH_KEYBOARD_LL,(HOOKPROC)LowLevelKeyboardProc, (HINSTANCE)ahInstance, 0);
-	// mousehook = SetWindowsHookEx(WH_MOUSE,(HOOKPROC)MouseProc, (HINSTANCE)ahInstance, 0);
-	//   cwphook = SetWindowsHookEx(WH_CALLWNDPROC,(HOOKPROC)Call_formProc, (HINSTANCE)ahInstance, 0);
-	//------------------------------------
-	Desktop = new ts::WindowsCOLLECTOR();
-	Tiles = new ts::WindowsTILES();
-	// hide from taskbar
-	DWORD dwExStyle = GetWindowLong((HWND)ahWnd,GWL_EXSTYLE);
-	SetWindowLong((HWND)ahWnd, GWL_EXSTYLE, dwExStyle|=WS_EX_TOOLWINDOW);
-	SetPriorityClass(GetCurrentProcess(),HIGH_PRIORITY_CLASS);
-	//------------------------------------
-	return true;
+    hMutex = ::CreateMutexA(NULL,TRUE,"tsoftPanel_mutex");
+    if  (GetLastError()==ERROR_ALREADY_EXISTS)
+        {return MessageBoxW(0,TEXT("Próbujesz uruchomić kilkukrotnie, to nie ma sensu ;-)"),
+                           TEXT("__tsoft->Panel.exe"),
+                       MB_OK|MB_ICONERROR|MB_SYSTEMMODAL);
+         }
+    //------------------------------------
+    GlobalKEYPressed.Ctrl = GlobalKEYPressed.Alt = GlobalKEYPressed.Locked = false;
+    llkbdhhook = SetWindowsHookEx(WH_KEYBOARD_LL,(HOOKPROC)LowLevelKeyboardProc, (HINSTANCE)ahInstance, 0);
+    // mousehook = SetWindowsHookEx(WH_MOUSE,(HOOKPROC)MouseProc, (HINSTANCE)ahInstance, 0);
+    //   cwphook = SetWindowsHookEx(WH_CALLWNDPROC,(HOOKPROC)Call_formProc, (HINSTANCE)ahInstance, 0);
+    //------------------------------------
+    Desktop = new ts::WindowsCOLLECTOR();
+    Tiles = new ts::WindowsTILES();
+    // hide from taskbar
+    DWORD dwExStyle = GetWindowLong((HWND)ahWnd,GWL_EXSTYLE);
+    SetWindowLong((HWND)ahWnd, GWL_EXSTYLE, dwExStyle|=WS_EX_TOOLWINDOW);
+    SetPriorityClass(GetCurrentProcess(),HIGH_PRIORITY_CLASS);
+    //------------------------------------
+    return true;
 }
 //---------------------------------------------------------------------------
 
@@ -62,26 +95,26 @@ if (!ac) return 0;
 
 if (aCode==VK_TAB && aPhase==WM_KEYDOWN) {
 /*
-		 if (Is_formVisible(Atab_form->Handle)==false)
-			{Show_form(Atab_form->Handle,SW_SHOW);
-			 Atab_form->tform_Start();
-			}
-		 else
-			{Atab_form->tform_Switch();
-			}*/
-		 GlobalKEYPressed.Locked = 1;
-		 return 1;
+         if (Is_formVisible(Atab_form->Handle)==false)
+            {Show_form(Atab_form->Handle,SW_SHOW);
+             Atab_form->tform_Start();
+            }
+         else
+            {Atab_form->tform_Switch();
+            }*/
+         GlobalKEYPressed.Locked = 1;
+         return 1;
 }
 if (GlobalKEYPressed.Locked==1)    {
 
-		 //Show_form(Atab_form->Handle,SW_HIDE);
-		 /*if (Atab_form->curicon!=Atab_form->oldicon)
-			{h = Atab_form->apps.Windows[Atab_form->oldicon];
-			 Show_form(h,SW_SHOW);
-			 Bring_formToTop(h);
-			}*/
-		 GlobalKEYPressed.Locked = 0;
-		 return 1;
+         //Show_form(Atab_form->Handle,SW_HIDE);
+         /*if (Atab_form->curicon!=Atab_form->oldicon)
+            {h = Atab_form->apps.Windows[Atab_form->oldicon];
+             Show_form(h,SW_SHOW);
+             Bring_formToTop(h);
+            }*/
+         GlobalKEYPressed.Locked = 0;
+         return 1;
 }
 
 return 0;
@@ -97,31 +130,31 @@ switch (a_Code) {
 case VK_END: // kill application on top
 //------------------------------------
 if (Desktop->Action(KILL_PROCESS,GetForegroundWindow(),0,0))
-	Tips_form->Execute("Proces: KONIEC",true,false);
+    Tips_form->Execute("Proces: KONIEC",true,false);
 return true;
 //------------------------------------
 case VK_F5: // idle app
 //------------------------------------
 if (Desktop->Action(SET_PRIORITY,GetForegroundWindow(),IDLE_PRIORITY_CLASS,0))
-	Tips_form->Execute("Proces: IDLE",true,true);
+    Tips_form->Execute("Proces: IDLE",true,true);
 return true;
 //------------------------------------
 case VK_F6: // normal app
 //------------------------------------
 if (Desktop->Action(SET_PRIORITY,GetForegroundWindow(),NORMAL_PRIORITY_CLASS,0))
-	Tips_form->Execute("Proces: NORMAL",true,true);
+    Tips_form->Execute("Proces: NORMAL",true,true);
 return true;
 //------------------------------------
 case VK_F7: // high app
 //------------------------------------
 if (Desktop->Action(SET_PRIORITY,GetForegroundWindow(),HIGH_PRIORITY_CLASS,0))
-	Tips_form->Execute("Proces: HIGH",true,true);
+    Tips_form->Execute("Proces: HIGH",true,true);
 return true;
 //------------------------------------
 case VK_F8: // realtime app
 //------------------------------------
 if (Desktop->Action(SET_PRIORITY,GetForegroundWindow(),REALTIME_PRIORITY_CLASS,0))
-	Tips_form->Execute("Process: REALTIME",true,true);
+    Tips_form->Execute("Process: REALTIME",true,true);
 return true;
 //------------------------------------
 case '1': // switch to desk 1
@@ -157,27 +190,27 @@ return true;
 case VK_ADD: // increse zoom factor
 //------------------------------------
 /*if (Lupa_form->Visible==false)
-	break;
-	Lupa_form->SubMenuZoomClick(NULL);
+    break;
+    Lupa_form->SubMenuZoomClick(NULL);
 if (Lupa_form->MenuItemZoom06->Checked && Lupa_form->MenuItemZoom08->Visible)
    {Lupa_form->MenuItemZoom08->Checked;
-	Lupa_form->MenuItemZoom08Click(NULL);
-	Tips_form->Execute("LUPA: zoom 8:1", true,false);
+    Lupa_form->MenuItemZoom08Click(NULL);
+    Tips_form->Execute("LUPA: zoom 8:1", true,false);
    }
 if (Lupa_form->MenuItemZoom04->Checked && Lupa_form->MenuItemZoom06->Visible)
    {Lupa_form->MenuItemZoom06->Checked;
-	Lupa_form->MenuItemZoom06Click(NULL);
-	Tips_form->Execute("LUPA: zoom 6:1", true,false);
+    Lupa_form->MenuItemZoom06Click(NULL);
+    Tips_form->Execute("LUPA: zoom 6:1", true,false);
    }
 if (Lupa_form->MenuItemZoom03->Checked && Lupa_form->MenuItemZoom04->Visible)
    {Lupa_form->MenuItemZoom04->Checked;
-	Lupa_form->MenuItemZoom04Click(NULL);
-	Tips_form->Execute("LUPA: zoom 4:1", true,false);
+    Lupa_form->MenuItemZoom04Click(NULL);
+    Tips_form->Execute("LUPA: zoom 4:1", true,false);
    }
 if (Lupa_form->MenuItemZoom02->Checked && Lupa_form->MenuItemZoom03->Visible)
    {Lupa_form->MenuItemZoom03->Checked;
-	Lupa_form->MenuItemZoom03Click(NULL);
-	Tips_form->Execute("LUPA: zoom 3:1", true,false);
+    Lupa_form->MenuItemZoom03Click(NULL);
+    Tips_form->Execute("LUPA: zoom 3:1", true,false);
    }
   */
 return true;
@@ -185,27 +218,27 @@ return true;
 case VK_SUBTRACT: // decrese zoom factor
 //------------------------------------
 /*if (Lupa_form->Visible==false)
-	break;
-	Lupa_form->SubMenuZoomClick(NULL);
+    break;
+    Lupa_form->SubMenuZoomClick(NULL);
 if (Lupa_form->MenuItemZoom03->Checked && Lupa_form->MenuItemZoom02->Visible)
    {Lupa_form->MenuItemZoom02->Checked;
-	Lupa_form->MenuItemZoom02Click(NULL);
-	Tips_form->Execute("LUPA: zoom 2:1", true,false);
+    Lupa_form->MenuItemZoom02Click(NULL);
+    Tips_form->Execute("LUPA: zoom 2:1", true,false);
    }
 if (Lupa_form->MenuItemZoom04->Checked && Lupa_form->MenuItemZoom03->Visible)
    {Lupa_form->MenuItemZoom03->Checked;
-	Lupa_form->MenuItemZoom03Click(NULL);
-	Tips_form->Execute("LUPA: zoom 3:1", true,false);
+    Lupa_form->MenuItemZoom03Click(NULL);
+    Tips_form->Execute("LUPA: zoom 3:1", true,false);
    }
 if (Lupa_form->MenuItemZoom06->Checked && Lupa_form->MenuItemZoom04->Visible)
    {Lupa_form->MenuItemZoom04->Checked;
-	Lupa_form->MenuItemZoom04Click(NULL);
-	Tips_form->Execute("LUPA: zoom 4:1", true,false);
+    Lupa_form->MenuItemZoom04Click(NULL);
+    Tips_form->Execute("LUPA: zoom 4:1", true,false);
    }
 if (Lupa_form->MenuItemZoom08->Checked && Lupa_form->MenuItemZoom06->Visible)
    {Lupa_form->MenuItemZoom06->Checked;
-	Lupa_form->MenuItemZoom06Click(NULL);
-	Tips_form->Execute("LUPA: zoom 6:1", true,false);
+    Lupa_form->MenuItemZoom06Click(NULL);
+    Tips_form->Execute("LUPA: zoom 6:1", true,false);
    }
    */
 return true;
@@ -249,25 +282,25 @@ case 'S': // set shadow
 fore_window = GetForegroundWindow();
 wexstyle = GetWindowLong(fore_window,GWL_EXSTYLE) | WS_EX_LAYERED | WS_EX_COMPOSITED;
 //if (!SetWindowLong(fore_window,GWL_EXSTYLE,wexstyle))
-	Tips_form->Execute("Okno: COMPOSITED",true,false);
+    Tips_form->Execute("Okno: COMPOSITED",true,false);
 SetLayeredWindowAttributes(fore_window, 0x00000000, 255, LWA_COLORKEY);
-					Sleep(1);
+                    Sleep(1);
 classstyle = GetClassLong(fore_window,GCL_STYLE) | CS_DROPSHADOW;
 //if (!SetClassLong(fore_window,GCL_STYLE,classstyle))
-	Tips_form->Execute("Okno: DROPSHADOW",true,false);
+    Tips_form->Execute("Okno: DROPSHADOW",true,false);
 return true;
 //------------------------------------
 case 'T': // set transparency of application on top
 //------------------------------------
 fore_window = GetForegroundWindow();
 if (Desktop->Action(GET_TRANSPARENCY,fore_window,0,0)<=0) {
-		if (Desktop->Action(SET_TRANSPARENCY,fore_window,20,0))
-				Tips_form->Execute("Okno: PRZEZROCZYSTE",true,false);
-		}
+        if (Desktop->Action(SET_TRANSPARENCY,fore_window,20,0))
+                Tips_form->Execute("Okno: PRZEZROCZYSTE",true,false);
+        }
 else {
-		if (Desktop->Action(SET_TRANSPARENCY,fore_window,-1,0))
-				Tips_form->Execute("Okno: NORMALNE",true,false);
-		}
+        if (Desktop->Action(SET_TRANSPARENCY,fore_window,-1,0))
+                Tips_form->Execute("Okno: NORMALNE",true,false);
+        }
 return true;
 //------------------------------------
 case VK_LWIN: // ctose this app

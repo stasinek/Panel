@@ -19,16 +19,16 @@
      <number>0</number>
     </property>
     <property name="leftMargin">
-     <number>0</number>
+     <number>8</number>
     </property>
     <property name="topMargin">
-     <number>0</number>
+     <number>8</number>
     </property>
     <property name="rightMargin">
-     <number>0</number>
+     <number>8</number>
     </property>
     <property name="bottomMargin">
-     <number>0</number>
+     <number>8</number>
     </property>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -70,7 +70,7 @@
            <layout class="QGridLayout" name="gridLayout"/>
           </item>
           <item>
-           <widget class="QTableWidget" name="tableWidget">
+           <widget class="QListView" name="listView">
             <property name="frameShape">
              <enum>QFrame::Box</enum>
             </property>
@@ -86,13 +86,6 @@
               <height>32</height>
              </size>
             </property>
-            <property name="columnCount">
-             <number>4</number>
-            </property>
-            <column/>
-            <column/>
-            <column/>
-            <column/>
            </widget>
           </item>
           <item>
@@ -123,7 +116,7 @@
              <widget class="QToolButton" name="toolButton_5">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>24</width>
                 <height>24</height>
                </size>
               </property>
@@ -149,12 +142,15 @@
              <widget class="QToolButton" name="toolButton_2">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>120</width>
                 <height>24</height>
                </size>
               </property>
               <property name="text">
-               <string>Sprawdź na stronie</string>
+               <string>Get more</string>
+              </property>
+              <property name="toolButtonStyle">
+               <enum>Qt::ToolButtonIconOnly</enum>
               </property>
              </widget>
             </item>
@@ -162,12 +158,12 @@
              <widget class="QToolButton" name="toolButton_3">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>120</width>
                 <height>24</height>
                </size>
               </property>
               <property name="text">
-               <string>Oznacz jako przeczytane</string>
+               <string>Mark all as readed</string>
               </property>
              </widget>
             </item>
@@ -175,7 +171,7 @@
              <widget class="QToolButton" name="toolButton">
               <property name="minimumSize">
                <size>
-                <width>0</width>
+                <width>24</width>
                 <height>24</height>
                </size>
               </property>

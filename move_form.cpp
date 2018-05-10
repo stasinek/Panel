@@ -10,11 +10,13 @@ TMove_form::TMove_form(QWidget *parent) :
     ui(new Ui::TMove_form)
 {
     ui->setupUi(this);
+    readPositionSettings(Settings,static_cast<QWidget*>(this),"move_form");
 }
 //---------------------------------------------------------------------------
 
 TMove_form::~TMove_form()
 {
+    writePositionSettings(Settings,static_cast<QWidget*>(this),"move_form");
     delete ui;
 }
 //---------------------------------------------------------------------------

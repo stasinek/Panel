@@ -17,11 +17,13 @@ TLupa_form::TLupa_form(QWidget *parent) :
     ::SetStretchBltMode(::GetDC((HWND)this->winId()),STRETCH_DELETESCANS);
     Timer1 = new QTimer(this);
     KluczRejestuSystemuWindows = new QSettings("HKEY_CURRENT_USER\\Software\\tsoft\\Panel\\Desk", QSettings::NativeFormat);
+    readPositionSettings(Settings,static_cast<QWidget*>(this),"lupa_form");
 }
 //---------------------------------------------------------------------------
 
 TLupa_form::~TLupa_form()
 {
+    writePositionSettings(Settings,static_cast<QWidget*>(this),"lupa_form");
     delete KluczRejestuSystemuWindows;
     delete Timer1;
     delete ui;

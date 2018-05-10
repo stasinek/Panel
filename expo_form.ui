@@ -32,19 +32,25 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="minimumSize">
+      <size>
+       <width>64</width>
+       <height>200</height>
+      </size>
+     </property>
      <property name="frameShape">
       <enum>QFrame::Box</enum>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>55</width>
-        <height>181</height>
+        <width>62</width>
+        <height>145</height>
        </rect>
       </property>
       <attribute name="label">
@@ -52,6 +58,14 @@
       </attribute>
      </widget>
      <widget class="QWidget" name="page_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>62</width>
+        <height>145</height>
+       </rect>
+      </property>
       <attribute name="label">
        <string>2</string>
       </attribute>
@@ -61,8 +75,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>55</width>
-        <height>181</height>
+        <width>62</width>
+        <height>145</height>
        </rect>
       </property>
       <attribute name="label">
@@ -74,8 +88,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>55</width>
-        <height>154</height>
+        <width>62</width>
+        <height>145</height>
        </rect>
       </property>
       <attribute name="label">
@@ -83,6 +97,14 @@
       </attribute>
      </widget>
      <widget class="QWidget" name="page_5">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>62</width>
+        <height>145</height>
+       </rect>
+      </property>
       <attribute name="label">
        <string>*</string>
       </attribute>

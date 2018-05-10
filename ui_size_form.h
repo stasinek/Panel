@@ -48,14 +48,18 @@ public:
         sizePolicy.setHeightForWidth(TSize_form->sizePolicy().hasHeightForWidth());
         TSize_form->setSizePolicy(sizePolicy);
         verticalLayout = new QVBoxLayout(TSize_form);
+        verticalLayout->setSpacing(4);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(8, 8, 8, 8);
         groupBox = new QGroupBox(TSize_form);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         horizontalSlider = new QSlider(groupBox);
         horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
         horizontalSlider->setGeometry(QRect(12, 16, 385, 25));
         horizontalSlider->setMaximum(1024);
+        horizontalSlider->setSingleStep(30);
         horizontalSlider->setPageStep(8);
+        horizontalSlider->setSliderPosition(0);
         horizontalSlider->setOrientation(Qt::Horizontal);
         horizontalSlider->setTickPosition(QSlider::TicksBothSides);
 
@@ -67,6 +71,7 @@ public:
         horizontalSlider_2->setObjectName(QStringLiteral("horizontalSlider_2"));
         horizontalSlider_2->setGeometry(QRect(12, 19, 385, 25));
         horizontalSlider_2->setMaximum(1024);
+        horizontalSlider_2->setSingleStep(30);
         horizontalSlider_2->setPageStep(8);
         horizontalSlider_2->setOrientation(Qt::Horizontal);
         horizontalSlider_2->setTickPosition(QSlider::TicksBothSides);

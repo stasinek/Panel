@@ -55,24 +55,27 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(toolBox->sizePolicy().hasHeightForWidth());
         toolBox->setSizePolicy(sizePolicy);
+        toolBox->setMinimumSize(QSize(64, 200));
         toolBox->setFrameShape(QFrame::Box);
         page = new QWidget();
         page->setObjectName(QStringLiteral("page"));
-        page->setGeometry(QRect(0, 0, 55, 181));
+        page->setGeometry(QRect(0, 0, 62, 145));
         toolBox->addItem(page, QStringLiteral("1"));
         page_4 = new QWidget();
         page_4->setObjectName(QStringLiteral("page_4"));
+        page_4->setGeometry(QRect(0, 0, 62, 145));
         toolBox->addItem(page_4, QStringLiteral("2"));
         page_3 = new QWidget();
         page_3->setObjectName(QStringLiteral("page_3"));
-        page_3->setGeometry(QRect(0, 0, 55, 181));
+        page_3->setGeometry(QRect(0, 0, 62, 145));
         toolBox->addItem(page_3, QStringLiteral("3"));
         page_2 = new QWidget();
         page_2->setObjectName(QStringLiteral("page_2"));
-        page_2->setGeometry(QRect(0, 0, 55, 154));
+        page_2->setGeometry(QRect(0, 0, 62, 145));
         toolBox->addItem(page_2, QStringLiteral("4"));
         page_5 = new QWidget();
         page_5->setObjectName(QStringLiteral("page_5"));
+        page_5->setGeometry(QRect(0, 0, 62, 145));
         toolBox->addItem(page_5, QStringLiteral("*"));
 
         horizontalLayout->addWidget(toolBox);
@@ -80,7 +83,7 @@ public:
 
         retranslateUi(TExpo_form);
 
-        toolBox->setCurrentIndex(4);
+        toolBox->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(TExpo_form);

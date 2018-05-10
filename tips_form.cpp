@@ -10,11 +10,13 @@ TTips_form::TTips_form(QWidget *parent) :
     ui(new Ui::TTips_form)
 {
     ui->setupUi(this);
+    readPositionSettings(Settings,static_cast<QWidget*>(this),"tips_form");
 }
 //---------------------------------------------------------------------------
 
 TTips_form::~TTips_form()
 {
+    writePositionSettings(Settings,static_cast<QWidget*>(this),"tips_form");
     delete ui;
 }
 //---------------------------------------------------------------------------

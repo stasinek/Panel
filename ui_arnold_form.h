@@ -18,6 +18,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QProgressBar>
@@ -25,7 +26,6 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -42,7 +42,7 @@ public:
     QWidget *page;
     QVBoxLayout *verticalLayout_5;
     QGridLayout *gridLayout;
-    QTableWidget *tableWidget;
+    QListView *listView;
     QFrame *line_3;
     QHBoxLayout *horizontalLayout;
     QToolButton *toolButton_5;
@@ -83,7 +83,7 @@ public:
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_2->setContentsMargins(8, 8, 8, 8);
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
@@ -108,17 +108,14 @@ public:
 
         verticalLayout_5->addLayout(gridLayout);
 
-        tableWidget = new QTableWidget(page);
-        if (tableWidget->columnCount() < 4)
-            tableWidget->setColumnCount(4);
-        tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        tableWidget->setFrameShape(QFrame::Box);
-        tableWidget->setFrameShadow(QFrame::Plain);
-        tableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        tableWidget->setIconSize(QSize(32, 32));
-        tableWidget->setColumnCount(4);
+        listView = new QListView(page);
+        listView->setObjectName(QStringLiteral("listView"));
+        listView->setFrameShape(QFrame::Box);
+        listView->setFrameShadow(QFrame::Plain);
+        listView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listView->setIconSize(QSize(32, 32));
 
-        verticalLayout_5->addWidget(tableWidget);
+        verticalLayout_5->addWidget(listView);
 
         line_3 = new QFrame(page);
         line_3->setObjectName(QStringLiteral("line_3"));
@@ -133,7 +130,7 @@ public:
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         toolButton_5 = new QToolButton(page);
         toolButton_5->setObjectName(QStringLiteral("toolButton_5"));
-        toolButton_5->setMinimumSize(QSize(0, 24));
+        toolButton_5->setMinimumSize(QSize(24, 24));
 
         horizontalLayout->addWidget(toolButton_5);
 
@@ -143,19 +140,20 @@ public:
 
         toolButton_2 = new QToolButton(page);
         toolButton_2->setObjectName(QStringLiteral("toolButton_2"));
-        toolButton_2->setMinimumSize(QSize(0, 24));
+        toolButton_2->setMinimumSize(QSize(120, 24));
+        toolButton_2->setToolButtonStyle(Qt::ToolButtonIconOnly);
 
         horizontalLayout->addWidget(toolButton_2);
 
         toolButton_3 = new QToolButton(page);
         toolButton_3->setObjectName(QStringLiteral("toolButton_3"));
-        toolButton_3->setMinimumSize(QSize(0, 24));
+        toolButton_3->setMinimumSize(QSize(120, 24));
 
         horizontalLayout->addWidget(toolButton_3);
 
         toolButton = new QToolButton(page);
         toolButton->setObjectName(QStringLiteral("toolButton"));
-        toolButton->setMinimumSize(QSize(0, 24));
+        toolButton->setMinimumSize(QSize(24, 24));
         toolButton->setIconSize(QSize(32, 32));
         toolButton->setToolButtonStyle(Qt::ToolButtonIconOnly);
 
@@ -297,8 +295,8 @@ public:
     {
         TArne_form->setWindowTitle(QApplication::translate("TArne_form", "MainWindow", 0));
         toolButton_5->setText(QApplication::translate("TArne_form", "...", 0));
-        toolButton_2->setText(QApplication::translate("TArne_form", "Sprawd\305\272 na stronie", 0));
-        toolButton_3->setText(QApplication::translate("TArne_form", "Oznacz jako przeczytane", 0));
+        toolButton_2->setText(QApplication::translate("TArne_form", "Get more", 0));
+        toolButton_3->setText(QApplication::translate("TArne_form", "Mark all as readed", 0));
         toolButton->setText(QApplication::translate("TArne_form", "X", 0));
         pushButton->setText(QApplication::translate("TArne_form", "PushButton", 0));
         toolButton_6->setText(QApplication::translate("TArne_form", "...", 0));

@@ -75,9 +75,10 @@ public:
         centralWidget = new QWidget(Ekierka_form);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
-        gridLayout->setSpacing(6);
+        gridLayout->setSpacing(8);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setContentsMargins(8, 8, 8, 8);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(10);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -85,6 +86,7 @@ public:
         horizontalLayout->setContentsMargins(40, -1, 0, -1);
         toolButton_5 = new QToolButton(centralWidget);
         toolButton_5->setObjectName(QStringLiteral("toolButton_5"));
+        toolButton_5->setMinimumSize(QSize(24, 24));
         toolButton_5->setStyleSheet(QStringLiteral("background-color: rgb(192, 192,192);"));
         toolButton_5->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
@@ -92,6 +94,7 @@ public:
 
         toolButton_6 = new QToolButton(centralWidget);
         toolButton_6->setObjectName(QStringLiteral("toolButton_6"));
+        toolButton_6->setMinimumSize(QSize(24, 24));
         toolButton_6->setStyleSheet(QStringLiteral("background-color: rgb(192, 192,192);"));
         toolButton_6->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
@@ -99,6 +102,7 @@ public:
 
         toolButton_7 = new QToolButton(centralWidget);
         toolButton_7->setObjectName(QStringLiteral("toolButton_7"));
+        toolButton_7->setMinimumSize(QSize(24, 24));
         toolButton_7->setStyleSheet(QStringLiteral("background-color: rgb(192, 192,192);"));
         toolButton_7->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
@@ -111,6 +115,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(toolButton_3->sizePolicy().hasHeightForWidth());
         toolButton_3->setSizePolicy(sizePolicy);
+        toolButton_3->setMinimumSize(QSize(24, 24));
         toolButton_3->setLayoutDirection(Qt::RightToLeft);
         toolButton_3->setStyleSheet(QStringLiteral("background-color: rgb(192, 192,192);"));
         toolButton_3->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -130,7 +135,7 @@ public:
         horizontalLayout_2->setContentsMargins(-1, -1, -1, 5);
         toolButton_4 = new QToolButton(centralWidget);
         toolButton_4->setObjectName(QStringLiteral("toolButton_4"));
-        toolButton_4->setMinimumSize(QSize(25, 0));
+        toolButton_4->setMinimumSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(toolButton_4);
 
@@ -157,12 +162,13 @@ public:
         horizontalSlider->setMaximum(380);
         horizontalSlider->setOrientation(Qt::Horizontal);
         horizontalSlider->setTickPosition(QSlider::TicksBelow);
-        horizontalSlider->setTickInterval(2);
+        horizontalSlider->setTickInterval(10);
 
         horizontalLayout_2->addWidget(horizontalSlider);
 
         toolButton_2 = new QToolButton(centralWidget);
         toolButton_2->setObjectName(QStringLiteral("toolButton_2"));
+        toolButton_2->setMinimumSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(toolButton_2);
 
@@ -199,12 +205,13 @@ public:
         verticalSlider->setInvertedAppearance(true);
         verticalSlider->setInvertedControls(false);
         verticalSlider->setTickPosition(QSlider::TicksBelow);
-        verticalSlider->setTickInterval(2);
+        verticalSlider->setTickInterval(10);
 
         verticalLayout->addWidget(verticalSlider);
 
         toolButton = new QToolButton(centralWidget);
         toolButton->setObjectName(QStringLiteral("toolButton"));
+        toolButton->setMinimumSize(QSize(24, 24));
 
         verticalLayout->addWidget(toolButton);
 

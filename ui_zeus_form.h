@@ -21,6 +21,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
+#include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -36,6 +37,10 @@ public:
     QHBoxLayout *horizontalLayout;
     QTableView *tableView;
     QGraphicsView *graphicsView;
+    QHBoxLayout *horizontalLayout_2;
+    QToolButton *toolButton;
+    QToolButton *toolButton_2;
+    QToolButton *toolButton_3;
     QPushButton *pushButton_2;
     QWidget *tab_2;
     QDialogButtonBox *buttonBox;
@@ -55,7 +60,9 @@ public:
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         verticalLayout_2 = new QVBoxLayout(tab);
+        verticalLayout_2->setSpacing(4);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(8, 8, 8, 8);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         tableView = new QTableView(tab);
@@ -71,10 +78,36 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout);
 
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(4);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        toolButton = new QToolButton(tab);
+        toolButton->setObjectName(QStringLiteral("toolButton"));
+        toolButton->setMinimumSize(QSize(24, 24));
+
+        horizontalLayout_2->addWidget(toolButton);
+
+        toolButton_2 = new QToolButton(tab);
+        toolButton_2->setObjectName(QStringLiteral("toolButton_2"));
+        toolButton_2->setMinimumSize(QSize(24, 24));
+
+        horizontalLayout_2->addWidget(toolButton_2);
+
+        toolButton_3 = new QToolButton(tab);
+        toolButton_3->setObjectName(QStringLiteral("toolButton_3"));
+        toolButton_3->setMinimumSize(QSize(24, 24));
+
+        horizontalLayout_2->addWidget(toolButton_3);
+
         pushButton_2 = new QPushButton(tab);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setMinimumSize(QSize(24, 24));
 
-        verticalLayout_2->addWidget(pushButton_2);
+        horizontalLayout_2->addWidget(pushButton_2);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
 
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
@@ -104,9 +137,12 @@ public:
     void retranslateUi(QDialog *TZeus_form)
     {
         TZeus_form->setWindowTitle(QApplication::translate("TZeus_form", "Zeus", 0));
-        pushButton_2->setText(QApplication::translate("TZeus_form", "Kill", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("TZeus_form", "Lista okien", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("TZeus_form", "Lista procesow", 0));
+        toolButton->setText(QApplication::translate("TZeus_form", "...", 0));
+        toolButton_2->setText(QApplication::translate("TZeus_form", "...", 0));
+        toolButton_3->setText(QApplication::translate("TZeus_form", "...", 0));
+        pushButton_2->setText(QApplication::translate("TZeus_form", "Kil", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("TZeus_form", "Windows list", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("TZeus_form", "Process list", 0));
     } // retranslateUi
 
 };

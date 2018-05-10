@@ -82,6 +82,7 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(4);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        horizontalLayout_3->setContentsMargins(2, 2, 2, 2);
         frame = new QFrame(frame_2);
         frame->setObjectName(QStringLiteral("frame"));
         sizePolicy.setHeightForWidth(frame->sizePolicy().hasHeightForWidth());

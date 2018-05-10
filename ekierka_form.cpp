@@ -14,11 +14,13 @@ Ekierka_form::Ekierka_form(QWidget *parent) :
     ui->graphicsView->setScene(scene);
     ui->horizontalSlider->setMaximum(ui->graphicsView->width());
     ui->verticalSlider->setMaximum(ui->graphicsView->height());
+    readPositionSettings(Settings,static_cast<QWidget*>(this),"ekierka_form");
 }
 //---------------------------------------------------------------------------
 
 Ekierka_form::~Ekierka_form()
 {
+    writePositionSettings(Settings,static_cast<QWidget*>(this),"ekierka_form");
     delete ui;
     delete scene;
 }

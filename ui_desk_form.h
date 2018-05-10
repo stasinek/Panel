@@ -36,6 +36,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(TDesk_form->sizePolicy().hasHeightForWidth());
         TDesk_form->setSizePolicy(sizePolicy);
+        TDesk_form->setMinimumSize(QSize(320, 240));
         gridLayout = new QGridLayout(TDesk_form);
         gridLayout->setSpacing(4);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));

@@ -3,17 +3,19 @@
 #include "ui_desk.h"
 
 TDesk_form::TDesk_form(QWidget *parent) :
-	QDialog(parent),
-	ui(new Ui::TDesk_form)
+    QDialog(parent),
+    ui(new Ui::TDesk_form)
 {
-	ui->setupUi(this);
-	KluczRejestuSystemuWindows = new QSettings("HKEY_CURRENT_USER\\Software\\tsoft\\Panel\\Lupa", QSettings::NativeFormat);
+    ui->setupUi(this);
+    KluczRejestuSystemuWindows = new QSettings("HKEY_CURRENT_USER\\Software\\tsoft\\Panel\\Lupa", QSettings::NativeFormat);
+    readPositionSettings(Settings,static_cast<QWidget*>(this),"desk_form");
 }
 
 TDesk_form::~TDesk_form()
 {
-	delete ui;
-	delete KluczRejestuSystemuWindows;
+    writePositionSettings(Settings,static_cast<QWidget*>(this),"desk_form");
+    delete ui;
+    delete KluczRejestuSystemuWindows;
 }
 
 //---------------------------------------------------------------------------
@@ -41,8 +43,8 @@ if (options.rect.bottom >= Desktop->Screen->Rect.bottom)
    {options.rect.top     = Desktop->Screen->Rect.bottom - (options.rect.bottom-options.rect.top);
    }
 SetWindowPos((HWND)this->winId(),NULL,
-		options.rect.left,options.rect.top,0,0,
-		SWP_NOCOPYBITS|SWP_NOSIZE|SWP_NOACTIVATE|SWP_NOZORDER);
+        options.rect.left,options.rect.top,0,0,
+        SWP_NOCOPYBITS|SWP_NOSIZE|SWP_NOACTIVATE|SWP_NOZORDER);
 }
 //---------------------------------------------------------------------------
 
@@ -51,11 +53,11 @@ void __fastcall TDesk_form::tform_Resize()
 options.rect.right  = options.rect.left + options.clientrect.right;
 options.rect.bottom = options.rect.top  + options.clientrect.bottom;
 AdjustWindowRectEx(&options.rect,
-		GetWindowLong((HWND)this->winId(),GWL_STYLE),false,
-		GetWindowLong((HWND)this->winId(),GWL_EXSTYLE));
+        GetWindowLong((HWND)this->winId(),GWL_STYLE),false,
+        GetWindowLong((HWND)this->winId(),GWL_EXSTYLE));
 SetWindowPos((HWND)this->winId(),NULL,
-		0,0,(options.rect.right-options.rect.left),(options.rect.bottom-options.rect.top),
-		SWP_NOCOPYBITS|SWP_NOMOVE|SWP_NOACTIVATE|SWP_NOZORDER);
+        0,0,(options.rect.right-options.rect.left),(options.rect.bottom-options.rect.top),
+        SWP_NOCOPYBITS|SWP_NOMOVE|SWP_NOACTIVATE|SWP_NOZORDER);
 tform_Calculate_Rect(); tform_Align(); tform_Redraw();
 }
 //---------------------------------------------------------------------------
@@ -63,8 +65,8 @@ tform_Calculate_Rect(); tform_Align(); tform_Redraw();
 void __fastcall TDesk_form::tform_Move()
 {
 SetWindowPos((HWND)this->winId(),NULL,
-		options.rect.left,options.rect.top,0,0,
-		SWP_NOCOPYBITS|SWP_NOSIZE|SWP_NOACTIVATE|SWP_NOZORDER);
+        options.rect.left,options.rect.top,0,0,
+        SWP_NOCOPYBITS|SWP_NOSIZE|SWP_NOACTIVATE|SWP_NOZORDER);
 tform_Align();
 }
 //---------------------------------------------------------------------------
@@ -87,42 +89,42 @@ Desktop->Screen->Context->Resize(options.clientrect.right,options.clientrect.bot
 SetStretchBltMode(Desktop->Screen->Context->Hdc,HALFTONE);
 
 for (int i = 1, x; i < 5; i++)
-	{
-	if (Desktop->Virtual[i]->Printed==true) x = i;
-	else x = 0;
-	StretchBlt(Desktop->Screen->Context->Hdc,
-			 options.deskrect[i].left, options.deskrect[i].top, options.deskrect[i].right-options.deskrect[i].left, options.deskrect[i].bottom-options.deskrect[i].top,
-			 Desktop->Virtual[x]->Context->Hdc,
-			 0,0,Desktop->Virtual[x]->Rect.right,Desktop->Virtual[x]->Rect.bottom,
-			 SRCCOPY);
-	}
+    {
+    if (Desktop->Virtual[i]->Printed==true) x = i;
+    else x = 0;
+    StretchBlt(Desktop->Screen->Context->Hdc,
+             options.deskrect[i].left, options.deskrect[i].top, options.deskrect[i].right-options.deskrect[i].left, options.deskrect[i].bottom-options.deskrect[i].top,
+             Desktop->Virtual[x]->Context->Hdc,
+             0,0,Desktop->Virtual[x]->Rect.right,Desktop->Virtual[x]->Rect.bottom,
+             SRCCOPY);
+    }
 for (int color, d = Desktop->Previous_Desktop_Index();;)
-	{
-	 if (d==Desktop->Previous_Desktop_Index()) brush = bluebrush;
-	 else brush = redbrush;
+    {
+     if (d==Desktop->Previous_Desktop_Index()) brush = bluebrush;
+     else brush = redbrush;
 
-	 RECT temprect = options.deskrect[d];
-	 temprect.left--;
-	 temprect.top--;
-	 temprect.right++;
-	 temprect.bottom++;
-	 ::FrameRect(Desktop->Screen->Context->Hdc,&temprect,brush);
-	 temprect.left--;
-	 temprect.top--;
-	 temprect.right++;
-	 temprect.bottom++;
-	 ::FrameRect(Desktop->Screen->Context->Hdc,&temprect,brush);
+     RECT temprect = options.deskrect[d];
+     temprect.left--;
+     temprect.top--;
+     temprect.right++;
+     temprect.bottom++;
+     ::FrameRect(Desktop->Screen->Context->Hdc,&temprect,brush);
+     temprect.left--;
+     temprect.top--;
+     temprect.right++;
+     temprect.bottom++;
+     ::FrameRect(Desktop->Screen->Context->Hdc,&temprect,brush);
 
-	 if (d!=Desktop->Active_Desktop_Index()) d =Desktop->Active_Desktop_Index();
-	 else break;
-	}
+     if (d!=Desktop->Active_Desktop_Index()) d =Desktop->Active_Desktop_Index();
+     else break;
+    }
 tform_Select();
 
 BitBlt(GetDC((HWND)this->winId()),
-		 0,0,options.clientrect.right,options.clientrect.bottom,
-		 Desktop->Screen->Context->Hdc,
-		 0,0,
-		 SRCCOPY);
+         0,0,options.clientrect.right,options.clientrect.bottom,
+         Desktop->Screen->Context->Hdc,
+         0,0,
+         SRCCOPY);
 lock = 0;
 }
 //---------------------------------------------------------------------------
@@ -138,61 +140,61 @@ static HBRUSH greenbrush = CreateSolidBrush(RGB(115,255,115));
 HBRUSH brush;
 
 for (d = 1; d <= 4; d++)
-	{if (cursorpoint.x >= options.deskrect[d].left && cursorpoint.x < options.deskrect[d].right &&
-	 cursorpoint.y >= options.deskrect[d].top  && cursorpoint.y < options.deskrect[d].bottom)
-	{curdesk = d;
-	 break;
-	}
-	}
+    {if (cursorpoint.x >= options.deskrect[d].left && cursorpoint.x < options.deskrect[d].right &&
+     cursorpoint.y >= options.deskrect[d].top  && cursorpoint.y < options.deskrect[d].bottom)
+    {curdesk = d;
+     break;
+    }
+    }
 if (curdesk!=0)
    {curhwnd = Desktop->Virtual[Desktop->Active_Desktop_Index()]->Handle_at_XY(
-				(Desktop->Screen->Rect.right  * (cursorpoint.x-options.deskrect[curdesk].left)) / (options.deskrect[curdesk].right  - options.deskrect[curdesk].left),
-				(Desktop->Screen->Rect.bottom * (cursorpoint.y-options.deskrect[curdesk].top))  / (options.deskrect[curdesk].bottom - options.deskrect[curdesk].top)
-				);
+                (Desktop->Screen->Rect.right  * (cursorpoint.x-options.deskrect[curdesk].left)) / (options.deskrect[curdesk].right  - options.deskrect[curdesk].left),
+                (Desktop->Screen->Rect.bottom * (cursorpoint.y-options.deskrect[curdesk].top))  / (options.deskrect[curdesk].bottom - options.deskrect[curdesk].top)
+                );
    }
 if (curdesk!=0 && curhwnd!=NULL)
    {
-	 RECT temprect;
-	 GetWindowRect(curhwnd,&temprect);
+     RECT temprect;
+     GetWindowRect(curhwnd,&temprect);
 
-	 temprect.left = this->options.deskrect[curdesk].left + (temprect.left   * (this->options.deskrect[curdesk].right  - this->options.deskrect[curdesk].left)) / Desktop->Screen->Rect.right;
-	 if (temprect.left < this->options.deskrect[curdesk].left)
-		 temprect.left = this->options.deskrect[curdesk].left;
-		 temprect.right = this->options.deskrect[curdesk].left + (temprect.right  * (this->options.deskrect[curdesk].right  - this->options.deskrect[curdesk].left)) / Desktop->Screen->Rect.right;
-	 if (temprect.right > this->options.deskrect[curdesk].right)
-		 temprect.right = this->options.deskrect[curdesk].right;
-			 temprect.top = this->options.deskrect[curdesk].top  + (temprect.top    * (this->options.deskrect[curdesk].bottom - this->options.deskrect[curdesk].top))  / Desktop->Screen->Rect.bottom;
-	 if (temprect.top < this->options.deskrect[curdesk].top)
-		 temprect.top = this->options.deskrect[curdesk].top;
-			 temprect.bottom = this->options.deskrect[curdesk].top  + (temprect.bottom * (this->options.deskrect[curdesk].bottom - this->options.deskrect[curdesk].top))  / Desktop->Screen->Rect.bottom;
-	 if (temprect.bottom > this->options.deskrect[curdesk].bottom)
-		 temprect.bottom = this->options.deskrect[curdesk].bottom;
+     temprect.left = this->options.deskrect[curdesk].left + (temprect.left   * (this->options.deskrect[curdesk].right  - this->options.deskrect[curdesk].left)) / Desktop->Screen->Rect.right;
+     if (temprect.left < this->options.deskrect[curdesk].left)
+         temprect.left = this->options.deskrect[curdesk].left;
+         temprect.right = this->options.deskrect[curdesk].left + (temprect.right  * (this->options.deskrect[curdesk].right  - this->options.deskrect[curdesk].left)) / Desktop->Screen->Rect.right;
+     if (temprect.right > this->options.deskrect[curdesk].right)
+         temprect.right = this->options.deskrect[curdesk].right;
+             temprect.top = this->options.deskrect[curdesk].top  + (temprect.top    * (this->options.deskrect[curdesk].bottom - this->options.deskrect[curdesk].top))  / Desktop->Screen->Rect.bottom;
+     if (temprect.top < this->options.deskrect[curdesk].top)
+         temprect.top = this->options.deskrect[curdesk].top;
+             temprect.bottom = this->options.deskrect[curdesk].top  + (temprect.bottom * (this->options.deskrect[curdesk].bottom - this->options.deskrect[curdesk].top))  / Desktop->Screen->Rect.bottom;
+     if (temprect.bottom > this->options.deskrect[curdesk].bottom)
+         temprect.bottom = this->options.deskrect[curdesk].bottom;
 
-	 InvertRect(Desktop->Screen->Context->Hdc,&this->options.deskrect[curdesk]);
-	 InvertRect(Desktop->Screen->Context->Hdc,&temprect);
+     InvertRect(Desktop->Screen->Context->Hdc,&this->options.deskrect[curdesk]);
+     InvertRect(Desktop->Screen->Context->Hdc,&temprect);
 
-	  brush = greenbrush;
+      brush = greenbrush;
 
-	 temprect.left--;
-	 temprect.top--;
-	 temprect.right++;
-		 temprect.bottom++;
-	 ::FrameRect(Desktop->Screen->Context->Hdc,&temprect,brush);
-	 temprect.left--;
-	 temprect.top--;
-	 temprect.right++;
-		 temprect.bottom++;
-	  ::FrameRect(Desktop->Screen->Context->Hdc,&temprect,brush);
+     temprect.left--;
+     temprect.top--;
+     temprect.right++;
+         temprect.bottom++;
+     ::FrameRect(Desktop->Screen->Context->Hdc,&temprect,brush);
+     temprect.left--;
+     temprect.top--;
+     temprect.right++;
+         temprect.bottom++;
+      ::FrameRect(Desktop->Screen->Context->Hdc,&temprect,brush);
 
-	 char text[64];
-	 GetWindowTextA(curhwnd,text,63);
-	 if (GetWindowTextLength(curhwnd)>0)
-		{this->setWindowTitle("Okno: " + (QString)text);
-		}
-	 else
-		{this->setWindowTitle("Okno: NULL");
-		}
-	 olddesk = curdesk; oldhwnd = curhwnd;
+     char text[64];
+     GetWindowTextA(curhwnd,text,63);
+     if (GetWindowTextLength(curhwnd)>0)
+        {this->setWindowTitle("Okno: " + (QString)text);
+        }
+     else
+        {this->setWindowTitle("Okno: NULL");
+        }
+     olddesk = curdesk; oldhwnd = curhwnd;
    }
 }
 //---------------------------------------------------------------------------
@@ -235,9 +237,9 @@ Desktop->Action(SET_TRANSPARENCY,(HWND)this->winId(),options.alpha,options.click
 tform_Move(); tform_Resize();
 SetClassLong((HWND)this->winId(),GCL_STYLE,GetClassLong((HWND)this->winId(),GCL_STYLE) | CS_SAVEBITS);
 if (options.zoomed)
-	SetWindowLong((HWND)this->winId(),GWL_STYLE,GetWindowLong((HWND)this->winId(),GWL_STYLE) | WS_MAXIMIZE);
+    SetWindowLong((HWND)this->winId(),GWL_STYLE,GetWindowLong((HWND)this->winId(),GWL_STYLE) | WS_MAXIMIZE);
 if (options.visible)
-	this->show();
+    this->show();
 }
 //---------------------------------------------------------------------------
 
@@ -246,75 +248,75 @@ void __fastcall TDesk_form::tform_Load(void)
 KluczRejestuSystemuWindows->sync();
 
 if (KluczRejestuSystemuWindows->childGroups().contains("clientrect",Qt::CaseInsensitive))
-	{options.clientrect.right  = KluczRejestuSystemuWindows->value("clientrect.right").toInt();
-	 options.clientrect.bottom = KluczRejestuSystemuWindows->value("clientrect.bottom").toInt();
-	}
+    {options.clientrect.right  = KluczRejestuSystemuWindows->value("clientrect.right").toInt();
+     options.clientrect.bottom = KluczRejestuSystemuWindows->value("clientrect.bottom").toInt();
+    }
 else
 {options.clientrect.right = 2*96+12;
  options.clientrect.bottom = 2*72+12;
-	}
+    }
 if (KluczRejestuSystemuWindows->childGroups().contains("rect",Qt::CaseInsensitive))
-	{options.rect.left = KluczRejestuSystemuWindows->value("rect.left").toInt();
-	 options.rect.top  = KluczRejestuSystemuWindows->value("rect.top").toInt();
-	}
+    {options.rect.left = KluczRejestuSystemuWindows->value("rect.left").toInt();
+     options.rect.top  = KluczRejestuSystemuWindows->value("rect.top").toInt();
+    }
 else
-	{options.rect.left = 0;
-	 options.rect.top = 0;
-	}
+    {options.rect.left = 0;
+     options.rect.top = 0;
+    }
 if (KluczRejestuSystemuWindows->childGroups().contains("zoomed",Qt::CaseInsensitive))
-	{options.zoomed = KluczRejestuSystemuWindows->value("zoomed").toBool();
-	}
+    {options.zoomed = KluczRejestuSystemuWindows->value("zoomed").toBool();
+    }
 else
-	{options.zoomed = false;
-	}
+    {options.zoomed = false;
+    }
 if (KluczRejestuSystemuWindows->childGroups().contains("alpha",Qt::CaseInsensitive))
-	{options.alpha = KluczRejestuSystemuWindows->value("alpha").toInt();
-	}
+    {options.alpha = KluczRejestuSystemuWindows->value("alpha").toInt();
+    }
 else
-	{options.alpha = -1;
-	}
+    {options.alpha = -1;
+    }
 if (KluczRejestuSystemuWindows->childGroups().contains("clickthrough",Qt::CaseInsensitive))
-	{options.clickthrough  = KluczRejestuSystemuWindows->value("clickthrough").toBool();
-	}
+    {options.clickthrough  = KluczRejestuSystemuWindows->value("clickthrough").toBool();
+    }
 else
-	{options.clickthrough  = 0;
-	}
+    {options.clickthrough  = 0;
+    }
 if (KluczRejestuSystemuWindows->childGroups().contains("visible",Qt::CaseInsensitive))
-	{options.visible = KluczRejestuSystemuWindows->value("visible").toInt();
-	}
+    {options.visible = KluczRejestuSystemuWindows->value("visible").toInt();
+    }
 else
-	{options.visible = false;
-	}
+    {options.visible = false;
+    }
 if (KluczRejestuSystemuWindows->childGroups().contains("interval",Qt::CaseInsensitive))
-	{options.interval = KluczRejestuSystemuWindows->value("interval").toInt();
-	}
+    {options.interval = KluczRejestuSystemuWindows->value("interval").toInt();
+    }
 else
-	{options.interval = 44;
-	}
+    {options.interval = 44;
+    }
 if (KluczRejestuSystemuWindows->childGroups().contains("zorder",Qt::CaseInsensitive))
-	{options.zorder = KluczRejestuSystemuWindows->value("zorder").toBool();
-	}
+    {options.zorder = KluczRejestuSystemuWindows->value("zorder").toBool();
+    }
 else
-	{options.zorder = (long)HWND_TOPMOST;
-	}
+    {options.zorder = (long)HWND_TOPMOST;
+    }
 if (KluczRejestuSystemuWindows->childGroups().contains("sight",Qt::CaseInsensitive))
-	{options.sight = KluczRejestuSystemuWindows->value("sight").toBool();
-	}
+    {options.sight = KluczRejestuSystemuWindows->value("sight").toBool();
+    }
 else
-	{options.sight = false;
-	}
+    {options.sight = false;
+    }
 if (KluczRejestuSystemuWindows->childGroups().contains("zoom",Qt::CaseInsensitive))
-	{options.zoom = KluczRejestuSystemuWindows->value("zoom").toInt();
-	}
+    {options.zoom = KluczRejestuSystemuWindows->value("zoom").toInt();
+    }
 else
-	{options.zoom = 3;
-	}
+    {options.zoom = 3;
+    }
 if (KluczRejestuSystemuWindows->childGroups().contains("central",Qt::CaseInsensitive))
-	{options.central = KluczRejestuSystemuWindows->value("central").toBool();
-	}
+    {options.central = KluczRejestuSystemuWindows->value("central").toBool();
+    }
 else
-	{options.central = false;
-	}
+    {options.central = false;
+    }
 }
 //---------------------------------------------------------------------------
 
@@ -322,7 +324,7 @@ void __fastcall TDesk_form::tform_Save(void)
 {
 if (!options.zoomed)
    {::GetClientRect((HWND)this->winId(),&options.clientrect);
-	::GetWindowRect((HWND)this->winId(),&options.rect);
+    ::GetWindowRect((HWND)this->winId(),&options.rect);
    }
 KluczRejestuSystemuWindows->setValue("rect.left",(int)options.rect.left);
 KluczRejestuSystemuWindows->setValue("rect.top",(int)options.rect.top);

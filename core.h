@@ -3,6 +3,7 @@
 #define __Core_HDR__
 //---------------------------------------------------------------------------
 #include <QtWidgets/QApplication>
+#include <QSettings>
 //---------------------------------------------------------------------------
 #include "windows.h"
 #include "wingdi.h"
@@ -26,6 +27,9 @@
 #include "zeus_form.h"
 //---------------------------------------------------------------------------
 extern QApplication *Application;
+extern QSettings *Settings;
+void __stdcall writePositionSettings(QSettings *assettings,QWidget *asender,char *aname);
+void __stdcall readPositionSettings(QSettings *assettings,QWidget *asender,char *aname);
 //---------------------------------------------------------------------------
 extern TAtab_form *Atab_form;
 extern TArne_form *Arne_form;
