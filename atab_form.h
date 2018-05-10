@@ -7,16 +7,15 @@ namespace Ui {
 class TAtab_form;
 }
 
-class TAtab_form : public QDialog
-{
-    Q_OBJECT
+class TAtab_form : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit TAtab_form(QWidget *parent = 0);
-    ~TAtab_form();
+  explicit TAtab_form(QWidget *parent = 0);
+  ~TAtab_form();
 
 private:
-    Ui::TAtab_form *ui;
+  Ui::TAtab_form *ui;
 };
 
 #endif // ATAB_H

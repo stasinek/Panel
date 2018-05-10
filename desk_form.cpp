@@ -1,15 +1,18 @@
+//---------------------------------------------------------------------------
 #include "core.h"
 #include "desk_form.h"
 #include "ui_desk.h"
+//---------------------------------------------------------------------------
 
 TDesk_form::TDesk_form(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TDesk_form)
 {
     ui->setupUi(this);
-    KluczRejestuSystemuWindows = new QSettings("HKEY_CURRENT_USER\\Software\\tsoft\\Panel\\Lupa", QSettings::NativeFormat);
     readPositionSettings(Settings,static_cast<QWidget*>(this),"desk_form");
+    KluczRejestuSystemuWindows = new QSettings("HKEY_CURRENT_USER\\Software\\tsoft\\Panel\\Lupa", QSettings::NativeFormat);
 }
+//---------------------------------------------------------------------------
 
 TDesk_form::~TDesk_form()
 {

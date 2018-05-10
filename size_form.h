@@ -7,16 +7,15 @@ namespace Ui {
 class TSize_form;
 }
 
-class TSize_form : public QDialog
-{
-    Q_OBJECT
+class TSize_form : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit TSize_form(QWidget *parent = 0);
-    ~TSize_form();
+  explicit TSize_form(QWidget *parent = 0);
+  ~TSize_form();
 
 private:
-    Ui::TSize_form *ui;
+  Ui::TSize_form *ui;
 };
 
 #endif // SIZE_H

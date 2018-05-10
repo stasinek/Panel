@@ -13,5 +13,7 @@
         <file>bmp/TRISIZE.png</file>
         <file>bmp/ZWIN.png</file>
         <file>bmp/menu.PNG</file>
+        <file>ico/DESK.ICO</file>
+        <file>ico/DESK.png</file>
     </qresource>
 </RCC>

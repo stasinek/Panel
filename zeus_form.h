@@ -7,16 +7,15 @@ namespace Ui {
 class TZeus_form;
 }
 
-class TZeus_form : public QDialog
-{
-    Q_OBJECT
+class TZeus_form : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit TZeus_form(QWidget *parent = 0);
-    ~TZeus_form();
+  explicit TZeus_form(QWidget *parent = 0);
+  ~TZeus_form();
 
 private:
-    Ui::TZeus_form *ui;
+  Ui::TZeus_form *ui;
 };
 
 #endif // ZEUS_H

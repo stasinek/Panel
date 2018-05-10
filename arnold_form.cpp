@@ -1,6 +1,8 @@
+//---------------------------------------------------------------------------
 #include "core.h"
 #include "arnold_form.h"
 #include "ui_arnoldwindow.h"
+//---------------------------------------------------------------------------
 
 TArne_form::TArne_form(QWidget *parent) :
     QMainWindow(parent),
@@ -11,27 +13,20 @@ TArne_form::TArne_form(QWidget *parent) :
     //if (w == 0 || w == 1);
     readPositionSettings(Settings,static_cast<QWidget*>(this),"arnold_form");
 }
+//---------------------------------------------------------------------------
 
 TArne_form::~TArne_form()
 {
     writePositionSettings(Settings,static_cast<QWidget*>(this),"arnold_form");
     delete ui;
 }
+//---------------------------------------------------------------------------
 
-void TArne_form::on_toolButton_6_clicked()
+void TArne_form::on_toolButton_clicked()
 {
-    this->ui->stackedWidget->setCurrentIndex(0);
+    this->close();
 }
-
-void TArne_form::on_toolButton_5_clicked()
-{
-    this->ui->stackedWidget->setCurrentIndex(1);
-}
-
-void TArne_form::on_toolButton_4_clicked()
-{
-
-}
+//---------------------------------------------------------------------------
 
 void TArne_form::on_toolButton_2_clicked()
 {
@@ -40,13 +35,28 @@ void TArne_form::on_toolButton_2_clicked()
     //QProcess browser(this); browser.start(s[0],p);
     QDesktopServices::openUrl(QUrl(s[0]));
 }
+//---------------------------------------------------------------------------
 
-void TArne_form::on_toolButton_clicked()
+void TArne_form::on_toolButton_4_clicked()
 {
-    this->close();
+
 }
+//---------------------------------------------------------------------------
+
+void TArne_form::on_toolButton_5_clicked()
+{
+    this->ui->stackedWidget->setCurrentIndex(1);
+}
+//---------------------------------------------------------------------------
+
+void TArne_form::on_toolButton_6_clicked()
+{
+    this->ui->stackedWidget->setCurrentIndex(0);
+}
+//---------------------------------------------------------------------------
 
 void TArne_form::on_toolButton_7_clicked()
 {
     on_toolButton_clicked();
 }
+//---------------------------------------------------------------------------

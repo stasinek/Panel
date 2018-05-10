@@ -7,16 +7,16 @@ namespace Ui {
 class TMove_form;
 }
 
-class TMove_form : public QDialog
-{
-    Q_OBJECT
+class TMove_form : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit TMove_form(QWidget *parent = 0);
-    ~TMove_form();
-    void  __fastcall tform_BeforeShow      (void);
+  explicit TMove_form(QWidget *parent = 0);
+  ~TMove_form();
+  void __fastcall tform_BeforeShow(void);
+
 private:
-    Ui::TMove_form *ui;
+  Ui::TMove_form *ui;
 };
 
 #endif // MOVE_form_H

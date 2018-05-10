@@ -51,15 +51,14 @@ LIBS += vcompd.lib
 LIBS += gdi32.lib user32.lib shell32.lib ole32.lib oleaut32.lib kernel32.lib uuid.lib
 }
 
-
 SOURCES += main.cpp\
         ./../../../x86_win32_classes/tsoft_Context.cpp \
         ../../../x86_win32_classes/tsoft_WindowsMover.cpp \
         ../../../x86_win32_classes/tsoft_WindowsTile.cpp \
         ../../../x86_win32_classes/tsoft_WindowsCollector.cpp \
         ../../../x86_win32_classes/tsoft_WindowsSnap.cpp \
-	core.cpp \
-	main_form.cpp \
+    core.cpp \
+    main_form.cpp \
     zoom_form.cpp \
     zeus_form.cpp \
     tips_form.cpp \
@@ -77,7 +76,7 @@ HEADERS  += core.h \
         ../../../x86_win32_classes/tsoft_WindowsTile.h \
         ../../../x86_win32_classes/tsoft_Context.h \
         ../../../x86_win32_classes/tsoft_WindowsSnap.h \
-	main_form.h \
+    main_form.h \
     zoom_form.h \
     zeus_form.h \
     tips_form.h \
@@ -110,6 +109,6 @@ HEADERS  += ekierka_form.h \
 
 FORMS    += ekierka_form.ui \
         wymiary_form.ui
-	
+
 RESOURCES += \
-	panel.qrc
+    panel.qrc

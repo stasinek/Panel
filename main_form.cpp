@@ -15,14 +15,17 @@
 
 TMain_form::TMain_form(QWidget *parent) :
     QDialog(parent),screen(QApplication::screens().at(0)),
-    ui(new Ui::TMain_form)
+    ui(new Ui::TMain_form),mainWindowIcon(":/new/prefix1/ico/DESK.png")
 {
     ui->setupUi(this);
-    trayIcon = new QSystemTrayIcon(this);
     this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     move_it = false;
     this->setMouseTracking(false);
     readPositionSettings(Settings,static_cast<QWidget*>(this),"main_form");
+    trayIcon = new QSystemTrayIcon(this);
+    if (mainWindowIcon.isNull()) { this->setWindowIcon(mainWindowIcon); }
+    trayIcon->show();
+    on_SpeedButtonDesk5_clicked(true);
 }
 //---------------------------------------------------------------------------
 
@@ -32,6 +35,7 @@ TMain_form::~TMain_form()
     Settings->sync();
     delete ui;
     delete trayIcon;
+//    delete mainWindowIcon;
 }
 //---------------------------------------------------------------------------
 
@@ -192,3 +196,8 @@ void TMain_form::on_SpeedButtonClose_clicked()
     this->close();
 }
 //---------------------------------------------------------------------------
+
+void TMain_form::on_TMain_form_windowTitleChanged(const QString &title)
+{
+        trayIcon->setToolTip("Panel.Qt " + title);
+}
