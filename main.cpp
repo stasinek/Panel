@@ -9,17 +9,17 @@ int main(int argc, char *argv[])
 
     Desktop = new ts::WindowsCOLLECTOR; Tiles = new ts::WindowsTILES;
 
-    Main_form = new TMain_form();
     Tips_form = new TTips_form();
-    Zeus_form = new TZeus_form();
-    Zoom_form = new TZoom_form();
     Size_form = new TSize_form();
-    Desk_form = new TDesk_form();
-    Lupa_form = new TLupa_form();
-    Expo_form = new TExpo_form();
     Move_form = new TMove_form();
+    Zoom_form = new TZoom_form();
+    Lupa_form = new TLupa_form();
     Atab_form = new TAtab_form();
+    Zeus_form = new TZeus_form();
     Arne_form = new TArne_form();
+    Desk_form = new TDesk_form();
+    Expo_form = new TExpo_form();
+    Main_form = new TMain_form();
 
     //InitializeHooks((HINSTANCE)::GetModuleHandle(NULL),(HWND)(Main_form->winId()));
     Main_form->show();

@@ -9,26 +9,26 @@ TDesk_form::TDesk_form(QWidget *parent) :
     ui(new Ui::TDesk_form)
 {
     ui->setupUi(this);
-    readPositionSettings(Settings,static_cast<QWidget*>(this),"desk_form");
+    readPositionSettings(Settings,static_cast<QWidget*>(this),(char*)"desk_form");
     KluczRejestuSystemuWindows = new QSettings("HKEY_CURRENT_USER\\Software\\tsoft\\Panel\\Lupa", QSettings::NativeFormat);
 }
 //---------------------------------------------------------------------------
 
 TDesk_form::~TDesk_form()
 {
-    writePositionSettings(Settings,static_cast<QWidget*>(this),"desk_form");
+    writePositionSettings(Settings,static_cast<QWidget*>(this),(char*)"desk_form");
     delete ui;
     delete KluczRejestuSystemuWindows;
 }
 
 //---------------------------------------------------------------------------
 
-void __fastcall TDesk_form::tform_BeforeShow(void)
+void __stdcall TDesk_form::tform_BeforeShow(void)
 {
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TDesk_form::tform_Align(void)
+void __stdcall TDesk_form::tform_Align(void)
 {
 ::GetWindowRect(Desktop->Screen->Hwnd,&Desktop->Screen->Rect);
 ::GetWindowRect((HWND)this->winId(),&options.rect);
@@ -51,7 +51,7 @@ SetWindowPos((HWND)this->winId(),NULL,
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TDesk_form::tform_Resize()
+void __stdcall TDesk_form::tform_Resize()
 {
 options.rect.right  = options.rect.left + options.clientrect.right;
 options.rect.bottom = options.rect.top  + options.clientrect.bottom;
@@ -65,7 +65,7 @@ tform_Calculate_Rect(); tform_Align(); tform_Redraw();
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TDesk_form::tform_Move()
+void __stdcall TDesk_form::tform_Move()
 {
 SetWindowPos((HWND)this->winId(),NULL,
         options.rect.left,options.rect.top,0,0,
@@ -74,7 +74,7 @@ tform_Align();
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TDesk_form::tform_Redraw()
+void __stdcall TDesk_form::tform_Redraw()
 {
 static bool lock = 0;
  if (lock==1) return;
@@ -132,25 +132,28 @@ lock = 0;
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TDesk_form::tform_Select()
+void __stdcall TDesk_form::tform_Select()
 {
 POINT cursorpoint;
 ::GetCursorPos(&cursorpoint);
 ::ScreenToClient((HWND)this->winId(),&cursorpoint);
-static int  curdesk = 0, d, olddesk;
-static HWND curhwnd = NULL, oldhwnd;
+static int  curdesk = 0, idesk = 0, olddesk = 0;
+static HWND curhwnd = NULL, oldhwnd = NULL;
 static HBRUSH greenbrush = CreateSolidBrush(RGB(115,255,115));
 HBRUSH brush;
 
-for (d = 1; d <= 4; d++)
-    {if (cursorpoint.x >= options.deskrect[d].left && cursorpoint.x < options.deskrect[d].right &&
-     cursorpoint.y >= options.deskrect[d].top  && cursorpoint.y < options.deskrect[d].bottom)
-    {curdesk = d;
-     break;
-    }
+for (idesk = 1; idesk <= 4; idesk++)
+    {
+     if (cursorpoint.x >= options.deskrect[idesk].left && cursorpoint.x < options.deskrect[idesk].right &&
+         cursorpoint.y >= options.deskrect[idesk].top  && cursorpoint.y < options.deskrect[idesk].bottom)
+        {
+        curdesk = idesk;
+        break;
+        }
     }
 if (curdesk!=0)
-   {curhwnd = Desktop->Virtual[Desktop->Active_Desktop_Index()]->Handle_at_XY(
+   {
+    curhwnd = Desktop->Virtual[Desktop->Active_Desktop_Index()]->Handle_at_XY(
                 (Desktop->Screen->Rect.right  * (cursorpoint.x-options.deskrect[curdesk].left)) / (options.deskrect[curdesk].right  - options.deskrect[curdesk].left),
                 (Desktop->Screen->Rect.bottom * (cursorpoint.y-options.deskrect[curdesk].top))  / (options.deskrect[curdesk].bottom - options.deskrect[curdesk].top)
                 );
@@ -160,16 +163,19 @@ if (curdesk!=0 && curhwnd!=NULL)
      RECT temprect;
      GetWindowRect(curhwnd,&temprect);
 
-     temprect.left = this->options.deskrect[curdesk].left + (temprect.left   * (this->options.deskrect[curdesk].right  - this->options.deskrect[curdesk].left)) / Desktop->Screen->Rect.right;
+         temprect.left = this->options.deskrect[curdesk].left + (temprect.left   * (this->options.deskrect[curdesk].right  - this->options.deskrect[curdesk].left)) / Desktop->Screen->Rect.right;
      if (temprect.left < this->options.deskrect[curdesk].left)
          temprect.left = this->options.deskrect[curdesk].left;
+
          temprect.right = this->options.deskrect[curdesk].left + (temprect.right  * (this->options.deskrect[curdesk].right  - this->options.deskrect[curdesk].left)) / Desktop->Screen->Rect.right;
      if (temprect.right > this->options.deskrect[curdesk].right)
          temprect.right = this->options.deskrect[curdesk].right;
-             temprect.top = this->options.deskrect[curdesk].top  + (temprect.top    * (this->options.deskrect[curdesk].bottom - this->options.deskrect[curdesk].top))  / Desktop->Screen->Rect.bottom;
+
+         temprect.top = this->options.deskrect[curdesk].top  + (temprect.top    * (this->options.deskrect[curdesk].bottom - this->options.deskrect[curdesk].top))  / Desktop->Screen->Rect.bottom;
      if (temprect.top < this->options.deskrect[curdesk].top)
          temprect.top = this->options.deskrect[curdesk].top;
-             temprect.bottom = this->options.deskrect[curdesk].top  + (temprect.bottom * (this->options.deskrect[curdesk].bottom - this->options.deskrect[curdesk].top))  / Desktop->Screen->Rect.bottom;
+
+         temprect.bottom = this->options.deskrect[curdesk].top  + (temprect.bottom * (this->options.deskrect[curdesk].bottom - this->options.deskrect[curdesk].top))  / Desktop->Screen->Rect.bottom;
      if (temprect.bottom > this->options.deskrect[curdesk].bottom)
          temprect.bottom = this->options.deskrect[curdesk].bottom;
 
@@ -181,12 +187,12 @@ if (curdesk!=0 && curhwnd!=NULL)
      temprect.left--;
      temprect.top--;
      temprect.right++;
-         temprect.bottom++;
+     temprect.bottom++;
      ::FrameRect(Desktop->Screen->Context->Hdc,&temprect,brush);
      temprect.left--;
      temprect.top--;
      temprect.right++;
-         temprect.bottom++;
+     temprect.bottom++;
       ::FrameRect(Desktop->Screen->Context->Hdc,&temprect,brush);
 
      char text[64];
@@ -202,7 +208,7 @@ if (curdesk!=0 && curhwnd!=NULL)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TDesk_form::tform_Calculate_Rect()
+void __stdcall TDesk_form::tform_Calculate_Rect()
 {
   options.deskrect[0].left = 4;
  options.deskrect[0].right = options.clientrect.right   - 4;
@@ -231,7 +237,7 @@ options.deskrect[4].bottom = options.deskrect[3].bottom;
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TDesk_form::tform_Initialize(void)
+void __stdcall TDesk_form::tform_Initialize(void)
 {
 tform_Load();
 Timer1->setInterval(options.interval);
@@ -246,7 +252,7 @@ if (options.visible)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TDesk_form::tform_Load(void)
+void __stdcall TDesk_form::tform_Load(void)
 {
 KluczRejestuSystemuWindows->sync();
 
@@ -300,7 +306,7 @@ if (KluczRejestuSystemuWindows->childGroups().contains("zorder",Qt::CaseInsensit
     {options.zorder = KluczRejestuSystemuWindows->value("zorder").toBool();
     }
 else
-    {options.zorder = (long)HWND_TOPMOST;
+    {options.zorder = (__int64)HWND_TOPMOST;
     }
 if (KluczRejestuSystemuWindows->childGroups().contains("sight",Qt::CaseInsensitive))
     {options.sight = KluczRejestuSystemuWindows->value("sight").toBool();
@@ -323,7 +329,7 @@ else
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TDesk_form::tform_Save(void)
+void __stdcall TDesk_form::tform_Save(void)
 {
 if (!options.zoomed)
    {::GetClientRect((HWND)this->winId(),&options.clientrect);
@@ -346,3 +352,27 @@ KluczRejestuSystemuWindows->sync();
 
 }
 //---------------------------------------------------------------------------
+
+int __stdcall TDesk_form::Desktop_Switch(int newdesk, bool redraw)
+{
+switch (newdesk)
+    {
+    case 1: Tips_form->Execute("BIURKO: 1",true,false);
+            Main_form->setWindowTitle("Desk: 1");
+    break;
+    case 2: Tips_form->Execute("BIURKO: 2",true,false);
+            Main_form->setWindowTitle("Desk: 2");
+    break;
+    case 3: Tips_form->Execute("BIURKO: 3",true,false);
+            Main_form->setWindowTitle("Desk: 3");
+    break;
+    case 4: Tips_form->Execute("BIURKO: 4",true,false);
+            Main_form->setWindowTitle("Desk: 4");
+    break;
+    default:
+    case 0: Tips_form->Execute("BIURKO: exclusive / shared",true,false);
+            Main_form->setWindowTitle("Desk: exclusive / shared");
+    break;
+    }
+return newdesk;
+}

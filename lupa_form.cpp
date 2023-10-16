@@ -17,13 +17,13 @@ TLupa_form::TLupa_form(QWidget *parent) :
     ::SetStretchBltMode(::GetDC((HWND)this->winId()),STRETCH_DELETESCANS);
     Timer1 = new QTimer(this);
     KluczRejestuSystemuWindows = new QSettings("HKEY_CURRENT_USER\\Software\\tsoft\\Panel\\Desk", QSettings::NativeFormat);
-    readPositionSettings(Settings,static_cast<QWidget*>(this),"lupa_form");
+    readPositionSettings(Settings,static_cast<QWidget*>(this),(char*)"lupa_form");
 }
 //---------------------------------------------------------------------------
 
 TLupa_form::~TLupa_form()
 {
-    writePositionSettings(Settings,static_cast<QWidget*>(this),"lupa_form");
+    writePositionSettings(Settings,static_cast<QWidget*>(this),(char*)"lupa_form");
     delete KluczRejestuSystemuWindows;
     delete Timer1;
     delete ui;
@@ -36,7 +36,7 @@ void TLupa_form::showEvent(QResizeEvent *) {
 //---------------------------------------------------------------------------
 
 
-void __fastcall TLupa_form::tform_Redraw(void)
+void __stdcall TLupa_form::tform_Redraw(void)
 {
 static bool lock = 0;
 if (lock==1)
@@ -53,7 +53,7 @@ options.central = options.clickthrough >0;
 static CURSORINFO oldcursorinfo, curcursorinfo;
 curcursorinfo.cbSize = sizeof(CURSORINFO);
 GetCursorInfo(&curcursorinfo);
-static POINT newformpoint;
+static POINT oldformpoint, newformpoint;
 
 static HBRUSH backgroundbrush = GetSysColorBrush(COLOR_BACKGROUND);
 static HBRUSH crossbrush = GetSysColorBrush(COLOR_BTNFACE);
@@ -185,7 +185,7 @@ lock = 0;
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TLupa_form::tform_Align(void)
+void __stdcall TLupa_form::tform_Align(void)
 {
 ::GetWindowRect(Desktop->Screen->Hwnd,&Desktop->Screen->Rect);
 ::GetWindowRect((HWND)this->winId(),&options.rect);
@@ -209,7 +209,7 @@ SetWindowPos((HWND)this->winId(),NULL,
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TLupa_form::tform_Move()
+void __stdcall TLupa_form::tform_Move()
 {
 SetWindowPos((HWND)this->winId(),NULL,
         options.rect.left,options.rect.top,0,0,
@@ -218,7 +218,7 @@ tform_Align();
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TLupa_form::tform_Resize(void)
+void __stdcall TLupa_form::tform_Resize(void)
 {
 options.rect.right  = options.rect.left + options.clientrect.right;
 options.rect.bottom = options.rect.top  + options.clientrect.bottom;
@@ -233,7 +233,7 @@ tform_Align();
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TLupa_form::tform_Initialize(void)
+void __stdcall TLupa_form::tform_Initialize(void)
 {
 tform_Load();
 Timer1->setInterval(options.interval);
@@ -251,7 +251,7 @@ SetClassLong((HWND)this->winId(),GCL_STYLE,GetClassLong((HWND)this->winId(),GCL_
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TLupa_form::tform_Load(void)
+void __stdcall TLupa_form::tform_Load(void)
 {
 KluczRejestuSystemuWindows->sync();
 
@@ -305,7 +305,7 @@ if (KluczRejestuSystemuWindows->childGroups().contains("zorder",Qt::CaseInsensit
     {options.zorder = KluczRejestuSystemuWindows->value("zorder").toBool();
     }
 else
-    {options.zorder = (long)HWND_TOPMOST;
+    {options.zorder = (__int64)HWND_TOPMOST;
     }
 if (KluczRejestuSystemuWindows->childGroups().contains("sight",Qt::CaseInsensitive))
     {options.sight = KluczRejestuSystemuWindows->value("sight").toBool();
@@ -328,7 +328,7 @@ else
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TLupa_form::tform_Save(void)
+void __stdcall TLupa_form::tform_Save(void)
 {
 if (!options.zoomed)
    {::GetClientRect((HWND)this->winId(),&options.clientrect);

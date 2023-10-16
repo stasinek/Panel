@@ -21,23 +21,23 @@ public:
   QSettings *KluczRejestuSystemuWindows;
   struct {
     RECT rect;
-    int alpha, clickthrough, zoomed, visible, zorder, interval, sight, zoom,
+    __int64 alpha, clickthrough, zoomed, visible, zorder, interval, sight, zoom,
         central;
     RECT clientrect, deskrect[5];
   } options;
   //---------------------------------------------------------------------------
-  int __fastcall Desktop_Switch(int newDesk, bool redraw);
+  int __stdcall Desktop_Switch(int newdesk, bool redraw);
   //---------------------------------------------------------------------------
-  void __fastcall tform_BeforeShow(void);
-  void __fastcall tform_Resize(void);
-  void __fastcall tform_Align(void);
-  void __fastcall tform_Move(void);
-  void __fastcall tform_Initialize(void);
-  void __fastcall tform_Save(void);
-  void __fastcall tform_Load(void);
-  void __fastcall tform_Calculate_Rect(void);
-  void __fastcall tform_Redraw(void);
-  void __fastcall tform_Select(void);
+  void __stdcall tform_BeforeShow(void);
+  void __stdcall tform_Resize(void);
+  void __stdcall tform_Align(void);
+  void __stdcall tform_Move(void);
+  void __stdcall tform_Initialize(void);
+  void __stdcall tform_Save(void);
+  void __stdcall tform_Load(void);
+  void __stdcall tform_Calculate_Rect(void);
+  void __stdcall tform_Redraw(void);
+  void __stdcall tform_Select(void);
   QTimer *Timer1;
 
 private:

@@ -48,6 +48,7 @@ private slots:
   void on_SpeedButtonMinimize_clicked(bool checked);
   void on_SpeedButtonClose_clicked();
   void on_actionExit_triggered();
+  void trayIconActivated(QSystemTrayIcon::ActivationReason reason);
 
   void on_TMain_form_windowTitleChanged(const QString &title);
 

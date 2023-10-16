@@ -15,7 +15,7 @@
 
 TMain_form::TMain_form(QWidget *parent) :
     QDialog(parent),screen(QApplication::screens().at(0)),
-    ui(new Ui::TMain_form),mainWindowIcon(":/new/prefix1/ico/DESK.png")
+    mainWindowIcon(":/new/prefix1/ico/DESK.png"),ui(new Ui::TMain_form)
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
@@ -24,8 +24,9 @@ TMain_form::TMain_form(QWidget *parent) :
     readPositionSettings(Settings,static_cast<QWidget*>(this),"main_form");
     trayIcon = new QSystemTrayIcon(this);
     if (mainWindowIcon.isNull()) { this->setWindowIcon(mainWindowIcon); }
+    connect(trayIcon,SIGNAL(&QSystemTrayIcon::activated(QSystemTrayIcon::ActivationReason)),this,SLOT(&trayIconActivated(QSystemTrayIcon::ActivationReason)));
     trayIcon->show();
-    on_SpeedButtonDesk5_clicked(true);
+//    on_SpeedButtonDesk5_clicked(true);
 }
 //---------------------------------------------------------------------------
 
@@ -92,60 +93,56 @@ void TMain_form::on_TMain_form_windowIconChanged(const QIcon &icon)
 
 void TMain_form::on_SpeedButtonDesk1_clicked(bool checked)
 {
-    setWindowTitle("Desk: 1");
     ui->SpeedButtonDesk1->setChecked(true);
     ui->SpeedButtonDesk2->setChecked(0);
     ui->SpeedButtonDesk3->setChecked(0);
     ui->SpeedButtonDesk4->setChecked(0);
     ui->SpeedButtonDesk5->setChecked(0);
+    Desk_form->Desktop_Switch(1,true);
 }
 //---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonDesk2_clicked(bool checked)
 {
-    setWindowTitle("Desk: 2");
     ui->SpeedButtonDesk1->setChecked(0);
     ui->SpeedButtonDesk2->setChecked(true);
     ui->SpeedButtonDesk3->setChecked(0);
     ui->SpeedButtonDesk4->setChecked(0);
     ui->SpeedButtonDesk5->setChecked(0);
-
+    Desk_form->Desktop_Switch(2,true);
 }
 //---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonDesk3_clicked(bool checked)
 {
-    setWindowTitle("Desk: 3");
     ui->SpeedButtonDesk1->setChecked(0);
     ui->SpeedButtonDesk2->setChecked(0);
     ui->SpeedButtonDesk3->setChecked(true);
     ui->SpeedButtonDesk4->setChecked(0);
     ui->SpeedButtonDesk5->setChecked(0);
-
+    Desk_form->Desktop_Switch(3,true);
 }
 //---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonDesk4_clicked(bool checked)
 {
-    setWindowTitle("Desk: 4");
     ui->SpeedButtonDesk1->setChecked(0);
     ui->SpeedButtonDesk2->setChecked(0);
     ui->SpeedButtonDesk3->setChecked(0);
     ui->SpeedButtonDesk4->setChecked(true);
     ui->SpeedButtonDesk5->setChecked(0);
-
+    Desk_form->Desktop_Switch(4,true);
 }
 //---------------------------------------------------------------------------
 
 void TMain_form::on_SpeedButtonDesk5_clicked(bool checked)
 {
-    setWindowTitle("Desk: Shared");
     ui->SpeedButtonDesk1->setChecked(0);
     ui->SpeedButtonDesk2->setChecked(0);
     ui->SpeedButtonDesk3->setChecked(0);
     ui->SpeedButtonDesk4->setChecked(0);
     ui->SpeedButtonDesk5->setChecked(true);
-
+    Desk_form->Desktop_Switch(0,true);
 }
 //---------------------------------------------------------------------------
 
@@ -182,6 +179,26 @@ void TMain_form::on_SpeedButtonMenu_clicked(bool checked)
 void TMain_form::on_SpeedButtonMinimize_clicked(bool checked)
 {
     this->setWindowState(Qt::WindowMinimized);
+}
+//---------------------------------------------------------------------------
+
+void TMain_form::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+switch (reason)
+    {
+    case QSystemTrayIcon::Trigger:
+//    trayIconMenu->exec(QCursor::pos());
+    break;
+    case QSystemTrayIcon::Context:
+    break;
+    case QSystemTrayIcon::DoubleClick:
+         this->show();
+    break;
+    case QSystemTrayIcon::MiddleClick:
+    break;
+    default:
+    break;
+    }
 }
 //---------------------------------------------------------------------------
 

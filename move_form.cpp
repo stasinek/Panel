@@ -21,7 +21,7 @@ TMove_form::~TMove_form()
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TMove_form::tform_BeforeShow(void)
+void __stdcall TMove_form::tform_BeforeShow(void)
 {
 RECT clientrect;
 ::GetClientRect((HWND)this->winId(),&clientrect);

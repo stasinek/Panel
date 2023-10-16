@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'zeus_form.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -128,7 +128,7 @@ public:
         QObject::connect(buttonBox, SIGNAL(accepted()), TZeus_form, SLOT(accept()));
         QObject::connect(buttonBox, SIGNAL(rejected()), TZeus_form, SLOT(reject()));
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(TZeus_form);
@@ -141,8 +141,8 @@ public:
         toolButton_2->setText(QApplication::translate("TZeus_form", "...", 0));
         toolButton_3->setText(QApplication::translate("TZeus_form", "...", 0));
         pushButton_2->setText(QApplication::translate("TZeus_form", "Kil", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("TZeus_form", "Windows list", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("TZeus_form", "Process list", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("TZeus_form", "WINDOWS LIST", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("TZeus_form", "PROCESS LIST", 0));
     } // retranslateUi
 
 };

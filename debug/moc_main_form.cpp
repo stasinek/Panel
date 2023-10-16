@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'main_form.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.5.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.5.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,15 +12,15 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'main_form.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.5.1. It"
+#error "This file was generated using the moc from 5.5.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_TMain_form_t {
-    QByteArrayData data[19];
-    char stringdata0[431];
+    QByteArrayData data[22];
+    char stringdata0[490];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,8 +46,11 @@ QT_MOC_LITERAL(13, 282, 26), // "on_SpeedButtonMenu_clicked"
 QT_MOC_LITERAL(14, 309, 30), // "on_SpeedButtonMinimize_clicked"
 QT_MOC_LITERAL(15, 340, 27), // "on_SpeedButtonClose_clicked"
 QT_MOC_LITERAL(16, 368, 23), // "on_actionExit_triggered"
-QT_MOC_LITERAL(17, 392, 32), // "on_TMain_form_windowTitleChanged"
-QT_MOC_LITERAL(18, 425, 5) // "title"
+QT_MOC_LITERAL(17, 392, 17), // "trayIconActivated"
+QT_MOC_LITERAL(18, 410, 33), // "QSystemTrayIcon::ActivationRe..."
+QT_MOC_LITERAL(19, 444, 6), // "reason"
+QT_MOC_LITERAL(20, 451, 32), // "on_TMain_form_windowTitleChanged"
+QT_MOC_LITERAL(21, 484, 5) // "title"
 
     },
     "TMain_form\0on_TMain_form_windowIconChanged\0"
@@ -62,8 +65,10 @@ QT_MOC_LITERAL(18, 425, 5) // "title"
     "on_SpeedButtonMenu_clicked\0"
     "on_SpeedButtonMinimize_clicked\0"
     "on_SpeedButtonClose_clicked\0"
-    "on_actionExit_triggered\0"
-    "on_TMain_form_windowTitleChanged\0title"
+    "on_actionExit_triggered\0trayIconActivated\0"
+    "QSystemTrayIcon::ActivationReason\0"
+    "reason\0on_TMain_form_windowTitleChanged\0"
+    "title"
 };
 #undef QT_MOC_LITERAL
 
@@ -73,7 +78,7 @@ static const uint qt_meta_data_TMain_form[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -81,20 +86,21 @@ static const uint qt_meta_data_TMain_form[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   84,    2, 0x08 /* Private */,
-       4,    1,   87,    2, 0x08 /* Private */,
-       6,    1,   90,    2, 0x08 /* Private */,
-       7,    1,   93,    2, 0x08 /* Private */,
-       8,    1,   96,    2, 0x08 /* Private */,
-       9,    1,   99,    2, 0x08 /* Private */,
-      10,    1,  102,    2, 0x08 /* Private */,
-      11,    1,  105,    2, 0x08 /* Private */,
-      12,    1,  108,    2, 0x08 /* Private */,
-      13,    1,  111,    2, 0x08 /* Private */,
-      14,    1,  114,    2, 0x08 /* Private */,
-      15,    0,  117,    2, 0x08 /* Private */,
-      16,    0,  118,    2, 0x08 /* Private */,
-      17,    1,  119,    2, 0x08 /* Private */,
+       1,    1,   89,    2, 0x08 /* Private */,
+       4,    1,   92,    2, 0x08 /* Private */,
+       6,    1,   95,    2, 0x08 /* Private */,
+       7,    1,   98,    2, 0x08 /* Private */,
+       8,    1,  101,    2, 0x08 /* Private */,
+       9,    1,  104,    2, 0x08 /* Private */,
+      10,    1,  107,    2, 0x08 /* Private */,
+      11,    1,  110,    2, 0x08 /* Private */,
+      12,    1,  113,    2, 0x08 /* Private */,
+      13,    1,  116,    2, 0x08 /* Private */,
+      14,    1,  119,    2, 0x08 /* Private */,
+      15,    0,  122,    2, 0x08 /* Private */,
+      16,    0,  123,    2, 0x08 /* Private */,
+      17,    1,  124,    2, 0x08 /* Private */,
+      20,    1,  127,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QIcon,    3,
@@ -110,7 +116,8 @@ static const uint qt_meta_data_TMain_form[] = {
     QMetaType::Void, QMetaType::Bool,    5,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   18,
+    QMetaType::Void, 0x80000000 | 18,   19,
+    QMetaType::Void, QMetaType::QString,   21,
 
        0        // eod
 };
@@ -134,7 +141,8 @@ void TMain_form::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 10: _t->on_SpeedButtonMinimize_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 11: _t->on_SpeedButtonClose_clicked(); break;
         case 12: _t->on_actionExit_triggered(); break;
-        case 13: _t->on_TMain_form_windowTitleChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 13: _t->trayIconActivated((*reinterpret_cast< QSystemTrayIcon::ActivationReason(*)>(_a[1]))); break;
+        case 14: _t->on_TMain_form_windowTitleChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -165,13 +173,13 @@ int TMain_form::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 14;
+        _id -= 15;
     }
     return _id;
 }

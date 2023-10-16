@@ -22,7 +22,7 @@ struct __GlobalKEYPressed GlobalKEYPressed;
 HANDLE hMutex;
 //---------------------------------------------------------------------------
 
-void writePositionSettings(QSettings *asettings,QWidget *sender,char *name)
+void __stdcall writePositionSettings(QSettings *asettings,QWidget *sender,char *name)
 {
     asettings->beginGroup( name );
 
@@ -37,7 +37,7 @@ void writePositionSettings(QSettings *asettings,QWidget *sender,char *name)
 }
 //---------------------------------------------------------------------------
 
-void readPositionSettings(QSettings *asettings, QWidget *sender,char *name)
+void __stdcall readPositionSettings(QSettings *asettings, QWidget *sender,char *name)
 {
     asettings->beginGroup( name );
 
@@ -159,32 +159,28 @@ return true;
 //------------------------------------
 case '1': // switch to desk 1
 //------------------------------------
-//Desk_form->Desktop_Switch(1,true);
-Tips_form->Execute("BIURKO: 1",true,false);
+Desk_form->Desktop_Switch(1,true);
 return true;
 //------------------------------------
 case '2': // switch to desk 2
 //------------------------------------
-//Desk_form->Desktop_Switch(2,true);
-Tips_form->Execute("BIURKO: 2",true,false);
+Desk_form->Desktop_Switch(2,true);
 return true;
 //------------------------------------
 case '3': // switch to desk 3
 //------------------------------------
-//Desk_form->Desktop_Switch(3,true);
-Tips_form->Execute("BIURKO: 3",true,false);
+Desk_form->Desktop_Switch(3,true);
 return true;
 //------------------------------------
 case '4': // switch to desk 4
 //------------------------------------
-//Desk_form->Desktop_Switch(4,true);
-Tips_form->Execute("BIURKO: 4",true,false);
+Desk_form->Desktop_Switch(4,true);
 return true;
 //------------------------------------
 case '5': // switch to desk share
 //------------------------------------
-//Desk_form->Desktop_Switch(0,true);
-Tips_form->Execute("BIURKO: *",true,false);
+Desk_form->Desktop_Switch(0,true);
+Tips_form->Execute("BIURKO: exclusive / shared*",true,false);
 return true;
 //------------------------------------
 case VK_ADD: // increse zoom factor
@@ -344,8 +340,8 @@ LRESULT LowLevelKeyboardProc(INT nCode, WPARAM wParam, LPARAM lParam) {
 if (nCode!=HC_ACTION)
    {return CallNextHookEx(llkbdhhook,nCode,wParam,lParam);
    }
-register BOOL fProcHandled;
-register KBDLLHOOKSTRUCT *pkbdllhook = (KBDLLHOOKSTRUCT*)lParam;
+BOOL fProcHandled;
+KBDLLHOOKSTRUCT *pkbdllhook = (KBDLLHOOKSTRUCT*)lParam;
 //------------------------------------
 
 // obs³uga naciœcienia klawisza, Ctrl, Alt, Tab i przekazanie dalej jeœli oba aktywne Ctrl+Alt
